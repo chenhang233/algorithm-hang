@@ -2,7 +2,7 @@
 
 ##### 01.栈(stack)
 
-###### 0.LIFO
+###### 0.LIFO(last-in，first-out)
 
 ```
 后进先出法
@@ -158,9 +158,159 @@ console.log(decimalToBinary(100345, 10))
 
 ##### 02.队列和双端队列
 
-```
+###### 0.FIFO( First Input First Output)
 
 ```
+先进先出法
+在系统设计中，以增加数据传输率、处理大量数据流、匹配具有不同传输率的系统为目的而广泛使用FIFO存储器，从而提高了系统性能。FIFO存储器是一个先入先出的双口缓冲器，即第一个进入其内的数据第一个被移出，其中一个是存储器的输入口，另一个口是存储器的输出口。
+```
+
+###### 1.队列是什么?双端队列是什么?
+
+```
+	队列是遵循先进先出（FIFO，也称为先来先服务）原则的一组有序的项。队列在尾部添加新元素，并从顶部移除元素。最新添加的元素必须排在队列的末尾。
+	双端队列（deque，或称 double-ended queue）是一种允许我们同时从前端和后端添加和移除元素的特殊队列。
+```
+
+###### 2.为什么需要队列?为什么需要双端队列?
+
+```
+	在计算机科学中，一个常见的例子就是打印队列。比如说我们需要打印五份文档。我们会打开每个文档，然后点击打印按钮。每个文档都会被发送至打印队列。第一个发送到打印队列的文档会首先被打印，以此类推，直到打印完所有文档。
+	在计算机科学中，双端队列的一个常见应用是存储一系列的撤销操作。每当用户在软件中进行了一个操作，该操作会被存在一个双端队列中（就像在一个栈里）。当用户点击撤销按钮时，该操作会被从双端队列中弹出，表示它被从后面移除了。在进行了预先定义的一定数量的操作后，最先进行的操作会被从双端队列的前端移除。由于双端队列同时遵守了先进先出和后进先出原则，可以说它是把队列和栈相结合的一种数据结构。
+```
+
+###### 03.创建队列
+
+```
+class queue {
+  constructor() {
+    this.count = 0
+    this.lowestCount = 0
+    this.items = {}
+  }
+  // 向队列添加元素
+  enqueue(element) {
+    this.items[this.count] = element
+    this.count++
+  }
+  // 从队列移除元素
+  dequeue() {
+    if (this.isEmpty()) {
+      return undefined
+    }
+    const result = this.items[this.lowestCount]
+    delete this.items[this.lowestCount]
+    this.lowestCount++
+    return result
+  }
+  // 查看队列头元素
+  peek() {
+    if (this.isEmpty()) {
+      return undefined
+    }
+    return this.items[this.lowestCount]
+  }
+  // 检查队列是否为空
+  isEmpty() {
+    return this.size() === 0
+  }
+  // 返回队列尺寸
+  size() {
+    return this.count - this.lowestCount
+  }
+  // 清空队列
+  clear() {
+    while (!this.isEmpty()) {
+      this.dequeue()
+    }
+    this.count = 0
+    this.lowestCount = 0
+  }
+}
+
+```
+
+###### 04.创建双端队列
+
+```
+class Deque {
+  constructor() {
+    this.count = 0
+    this.lowestCount = 0
+    this.items = {}
+  }
+  // 该方法在双端队列前端添加新的元素
+  addFront(element) {
+    if (this.isEmpty()) {
+      this.addBack(element)
+    } else if (this.lowestCount > 0) {
+      this.lowestCount--
+      this.items[this.lowestCount] = element
+    } else {
+      for (let i = this.count; i > 0; i--) {
+        this.items[i] = this.items[i - 1]
+      }
+      this.items[0] = element
+      this.lowestCount = 0
+      this.count++
+    }
+  }
+  // 该方法在双端队列后端添加新的元素
+  addBack(element) {
+    this.items[this.count] = element
+    this.count++
+  }
+  // 该方法会从双端队列前端移除第一个元素
+  removeFront() {
+    if (this.isEmpty()) {
+      return undefined
+    }
+    const first = this.items[this.lowestCount]
+    delete this.items[this.lowestCount]
+    this.lowestCount++
+    return first
+  }
+  // 该方法会从双端队列后端移除第一个元素
+  removeBack() {
+    if (this.isEmpty()) {
+      return undefined
+    }
+    this.count--
+    const last = this.items[this.count]
+    delete this.items[this.count]
+    return last
+  }
+  // 该方法返回双端队列前端的第一个元素
+  peekFront() {
+    if (this.isEmpty()) {
+      return undefined
+    }
+    return this.items[this.lowestCount]
+  }
+  // 该方法返回双端队列后端的第一个元素
+  peekBack() {
+    if (this.isEmpty()) {
+      return undefined
+    }
+    return this.items[this.count - 1]
+  }
+  // 检查队列是否为空
+  isEmpty() {
+    return this.size() === 0
+  }
+  // 返回队列尺寸
+  size() {
+    return this.count - this.lowestCount
+  }
+}
+
+```
+
+
+
+
+
+
 
 ##### 03.链表
 
