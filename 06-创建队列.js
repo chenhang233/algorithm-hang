@@ -43,3 +43,5 @@ class queue {
     this.lowestCount = 0
   }
 }
+
+module.exports = queue

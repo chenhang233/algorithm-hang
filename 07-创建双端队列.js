@@ -68,3 +68,5 @@ class Deque {
     return this.count - this.lowestCount
   }
 }
+
+module.exports = Deque

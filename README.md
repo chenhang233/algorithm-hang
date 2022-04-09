@@ -306,9 +306,68 @@ class Deque {
 
 ```
 
+###### 05.使用队列和双端队列来解决问题
 
+1.击鼓传花的游戏---循环队列
 
+```
+const Queue = require('./06-创建队列')
+// elementsList 参加的人 num 传递的频率
+function hotPotato(elementsList, num) {
+  const eliminatedList = [] // 被淘汰的人
+  const queue = new Queue() // 队列
+  for (let i = 0; i < elementsList.length; i++) {
+    queue.enqueue(elementsList[i])
+  }
+  while (queue.size() > 1) {
+    for (let i = 0; i < num; i++) {
+      queue.enqueue(queue.dequeue())
+    }
+    eliminatedList.push(queue.dequeue())
+  }
+  return {
+    淘汰的人们: elementsList,
+    获胜者: queue.dequeue(),
+  }
+}
 
+const names = ['小明', '小花', '小白', '小安', '小黄']
+const math = Math.max(1, Math.floor(Math.random() * 10))
+const result = hotPotato(names, math)
+console.log(result)
+
+```
+
+2.回文检测器---双端队列
+
+```
+const Deque = require('./07-创建双端队列')
+
+function palindromeChecker(str) {
+  if (str === undefined || str === null || (str !== null && str.length === 0)) {
+    return false
+  }
+  let isEqual = true
+  let firstChar, lastChar
+  const deque = new Deque()
+  const lowerString = str.toLocaleLowerCase().split(' ').join('')
+  for (let i = 0; i < lowerString.length; i++) {
+    deque.addBack(lowerString[i])
+  }
+  while (deque.size() > 1 && isEqual) {
+    firstChar = deque.removeFront()
+    lastChar = deque.removeBack()
+    if (firstChar !== lastChar) {
+      isEqual = false
+    }
+  }
+  return isEqual
+}
+
+console.log('level', palindromeChecker('level'))
+console.log('level1', palindromeChecker('level1'))
+
+```
 
 
 
