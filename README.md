@@ -516,7 +516,7 @@ console.log(list.toString())
 
 ```
 
-###### 4.创建双向链表
+###### 4.双向链表
 
 双向链表的优势:
 
@@ -612,9 +612,117 @@ console.log(listDoubly.tail)
 
 ```
 
+###### 5.循环链表
 
+循环链表可以像链表一样只有单向引用，也可以像双向链表一样有双向引用。循环链表和链 表之间唯一的区别在于，最后一个元素指向下一个元素的指针（tail.next）不是引用 undefined，而是指向第一个元素（head）
 
+```
+const { Node, LinkedList } = require('./01.创建链表')
+class CircularLinkedList extends LinkedList {
+  constructor(equalsFn = defaultEquals) {
+    super(equalsFn)
+  }
+  //向循环链表中插入元素的逻辑和向普通链表中插入元素的逻辑是一样的。不同之处在于我们
+  // 需要将循环链表尾部节点的 next 引用指向头部节点。
+  insert(element, index) {
+    if (index >= 0 && index <= this.count) {
+      const node = new Node(element)
+      let current = this.head
+      if (index === 0) {
+        if (this.head == null) {
+          this.head = node
+          node.next = this.head
+        } else {
+          node.next = current
+          current = this.getElementAt(this.size())
+          // 更新最后一个元素
+          this.head = node
+          current.next = this.head
+        }
+      } else {
+        // 这种场景没有变化
+        const previous = this.getElementAt(index - 1)
+        node.next = previous.next
+        previous.next = node
+      }
+      this.count++
+      return true
+    }
+    return false
+  }
+  //   要从循环链表中移除元素，我们只需要考虑第二种情况，也就是修改循环链表的 head 元素。
+  removeAt(index) {
+    if (index >= 0 && index < this.count) {
+      let current = this.head
+      if (index === 0) {
+        if (this.size() === 1) {
+          this.head = undefined
+        } else {
+          const removed = this.head
+          current = this.getElementAt(this.size())
+          this.head = this.head.next
+          current.next = this.head
+          current = removed // 返回删除项
+        }
+      } else {
+        // 不需要修改循环链表最后一个元素
+        const previous = this.getElementAt(index - 1)
+        current = previous.next
+        previous.next = current.next
+      }
+      this.count--
+      return current.element
+    }
+    return undefined
+  }
+}
 
+```
+
+###### 6.有序链表
+
+有序链表是指保持元素有序的链表结构。除了使用排序算法之外，我们还可以将元素插入到 正确的位置来保证链表的有序性。
+
+```
+const { Node, LinkedList } = require('./01.创建链表')
+
+const Compare = {
+  LESS_THAN: -1,
+  BIGGER_THAN: 1,
+}
+function defaultCompare(a, b) {
+  if (a === b) {
+    return 0
+  }
+  return a < b ? Compare.LESS_THAN : Compare.BIGGER_THAN
+}
+class SortedLinkedList extends LinkedList {
+  constructor(equalsFn = defaultEquals, compareFn = defaultCompare) {
+    super(equalsFn)
+    this.compareFn = compareFn
+  }
+  insert(element, index = 0) {
+    if (this.isEmpty()) {
+      return super.insert(element, 0)
+    }
+    const pos = this.getIndexNextSortedElement(element)
+    return super.insert(element, pos)
+  }
+  getIndexNextSortedElement(element) {
+    let current = this.head
+    let i = 0
+    for (; i < this.size() && current; i++) {
+      const comp = this.compareFn(element, current.element)
+      if (comp === Compare.LESS_THAN) {
+        return i
+      }
+      current = current.next
+    }
+    return i
+  }
+}
+
+```
 
 
 
