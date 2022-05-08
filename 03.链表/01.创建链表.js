@@ -60,8 +60,9 @@ class LinkedList {
     if (index >= 0 && index <= this.count) {
       const node = new Node(element)
       if (index === 0) {
-        node.next = this.head
-        this.head = current
+        const current = this.head
+        node.next = current
+        this.head = node
       } else {
         const previous = this.getElementAt(index - 1)
         const current = previous.next
