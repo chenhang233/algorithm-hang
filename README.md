@@ -1,6 +1,6 @@
 ### js算法
 
-##### 01.栈(stack)
+### 01.栈(stack)
 
 ###### 0.LIFO(last-in，first-out)
 
@@ -9,13 +9,13 @@
 指假定后入库的存货先发出，据此计算发出存货成本的方法。采用后进先出法时，每批发出存货的成本，按存货中最后入库的那批单价计算，如果发出存货的一批数量超过最后入库的那一批数量，超过部分依次按上一批入库的单价计算。
 ```
 
-###### 1.是什么?
+###### 1.概念
 
 ```
 又名堆栈，它是一种运算受限的线性表。栈和队列类似于数组的数据结构
 ```
 
-###### 2.为什么需要?
+###### 2.意义
 
 ```
 1.在添加和删除元素时更为可控
@@ -156,7 +156,7 @@ console.log(decimalToBinary(100345, 10))
 
 
 
-##### 02.队列和双端队列
+### 02.队列和双端队列
 
 ###### 0.FIFO( First Input First Output)
 
@@ -165,14 +165,14 @@ console.log(decimalToBinary(100345, 10))
 在系统设计中，以增加数据传输率、处理大量数据流、匹配具有不同传输率的系统为目的而广泛使用FIFO存储器，从而提高了系统性能。FIFO存储器是一个先入先出的双口缓冲器，即第一个进入其内的数据第一个被移出，其中一个是存储器的输入口，另一个口是存储器的输出口。
 ```
 
-###### 1.队列是什么?双端队列是什么?
+###### 1.概念
 
 ```
 	队列是遵循先进先出（FIFO，也称为先来先服务）原则的一组有序的项。队列在尾部添加新元素，并从顶部移除元素。最新添加的元素必须排在队列的末尾。
 	双端队列（deque，或称 double-ended queue）是一种允许我们同时从前端和后端添加和移除元素的特殊队列。
 ```
 
-###### 2.为什么需要队列?为什么需要双端队列?
+###### 2.意义
 
 ```
 	在计算机科学中，一个常见的例子就是打印队列。比如说我们需要打印五份文档。我们会打开每个文档，然后点击打印按钮。每个文档都会被发送至打印队列。第一个发送到打印队列的文档会首先被打印，以此类推，直到打印完所有文档。
@@ -371,15 +371,15 @@ console.log('level1', palindromeChecker('level1'))
 
 
 
-##### 03.链表
+### 03.链表
 
-###### 1.是什么?
+###### 1.概念
 
 ```
 链表是存储有序的元素集合，但不同于数组，链表中的元素在内存中并不是连续放置的。每个元素由一个存储元素本身的节点和一个指向下一个元素的引用（也称指针或链接）组成
 ```
 
-###### 2.为什么需要?
+###### 2.意义
 
 ```
 数组有一个缺点:
@@ -726,63 +726,247 @@ class SortedLinkedList extends LinkedList {
 
 
 
+### 04.集合
+
+###### 1.概念
+
+```JSX
+	集合是由一组无序且唯一（即不能重复）的项组成的。该数据结构使用了与有限集合相同的数学概念，但应用在计算机科学的数据结构中。在数学中，集合是一组不同对象的集。比如说，一个由大于或等于 0 的整数组成的自然数集合：N = {0, 1, 2, 3, 4, 5, 6, …}。集合中
+的对象列表用花括号（{}）包围。
+	还有一个概念叫空集。空集就是不包含任何元素的集合。比如 24 和 29 之间的素数集合，由于 24 和 29 之间没有素数（除了 1 和自身，没有其他正因数的、大于 1 的自然数），这个集合就是空集。空集用{ }表示。
+	结论:  集合是一个既没有重复元素，也没有顺序概念的数组。
+```
+
+###### 2.意义
+
+```
+集合运算:
+	集合是数学中基础的概念，在计算机领域也非常重要。它在计算机科学中的主要应用之一是数据库，而数据库是大多数应用程序的根基。集合被用于查询的设计和处理。当我们创建一条从关系型数据库（Oracle、Microsoft SQL Server、MySQL 等）中获取一个数据集合的查询语句时，
+使用的就是集合运算，并且数据库也会返回一个数据集合。当我们创建一条 SQL 查询命令时，可以指定是从表中获取全部数据还是获取其中的子集；也可以获取两张表共有的数据、只存在于一张表中的数据（不存在于另一张表中），或是存在于两张表内的数据（通过其他运算）。这些
+SQL 领域的运算叫作联接，而 SQL 联接的基础就是集合运算。
+
+	 并集：对于给定的两个集合，返回一个包含两个集合中所有元素的新集合。
+	 交集：对于给定的两个集合，返回一个包含两个集合中共有元素的新集合。
+	 差集：对于给定的两个集合，返回一个包含所有存在于第一个集合且不存在于第二个集合的元素的新集合。
+	 子集：验证一个给定集合是否是另一集合的子集。集合 A 是集合 B 的子集（或集合 B 包含集合 A）
+```
+
+###### 3.创建集合类
+
+```
+class Set {
+  constructor() {
+    this.items = {}
+  }
+  has(element) {
+    return Object.prototype.hasOwnProperty.call(this.items, element)
+  }
+  add(element) {
+    if (!this.has(element)) {
+      this.items[element] = element
+      return true
+    }
+    return false
+  }
+  delete(element) {
+    if (this.has(element)) {
+      delete this.items[element]
+      return true
+    }
+    return false
+  }
+  clear() {
+    this.items = {}
+  }
+  size() {
+    return Object.keys(this.items).length
+  }
+  sizeLegacy() {
+    let count = 0
+    for (let key in this.items) {
+      if (this.items.hasOwnProperty(key)) {
+        count++
+      }
+      return count
+    }
+  }
+  values() {
+    return Object.values(this.items)
+  }
+  valuesLegacy() {
+    let values = []
+    for (let key in this.items) {
+      if (this.items.hasOwnProperty(key)) {
+        values.push(key)
+      }
+    }
+    return values
+  }
+  // 并集
+  union(otherSet) {
+    const unionSet = new Set()
+    this.values().forEach((value) => unionSet.add(value))
+    otherSet.values().forEach((value) => unionSet.add(value))
+    return unionSet
+  }
+  // 交集
+  intersection(otherSet) {
+    const intersectionSet = new Set()
+    const values = this.values()
+    const otherValues = otherSet.values()
+    let biggerSet = values
+    let smallerSet = otherValues
+    if (otherValues.length - values.length > 0) {
+      biggerSet = otherValues
+      smallerSet = values
+    }
+    smallerSet.forEach((value) => {
+      if (biggerSet.includes(value)) {
+        intersectionSet.add(value)
+      }
+    })
+    return intersectionSet
+  }
+  // 差集 所有存在于集合 A 但不存在于集合 B 的元素
+  difference(otherSet) {
+    const differenceSet = new Set()
+    this.values().forEach((value) => {
+      if (!otherSet.has(value)) {
+        differenceSet.add(value)
+      }
+    })
+    return differenceSet
+  }
+  // 子集
+  isSubsetOf(otherSet) {
+    if (this.size() > otherSet.size()) {
+      return false
+    }
+    let isSubset = true
+    this.values().every((value) => {
+      if (!otherSet.has(value)) {
+        // {4}
+        isSubset = false // {5}
+        return false
+      }
+      return true // {6}
+    })
+    return isSubset // {7}
+  }
+}
+
+const set = new Set()
+set.add(1)
+console.log(set.values())
+
+```
+
+######  4.使用扩展运算符
+
+​	种计算并集、交集和差集的简便方法，就是使用扩展运算符，它包含在 ES2015 中
+
+​	整个过程包含三个步骤： (1) 将集合转化为数组； (2) 执行需要的运算； (3) 将结果转化回集合。
+
+```jsx
+并集
+console.log(new Set([...setA, ...setB])); 
+
+ES2015 的 Set 类支持向构造函数传入一个数组来初始化集合的运算，那么我们对 setA 使
+用扩展运算符（...setA）会将它的值转化为一个数组（展开它的值），然后对 setB 也这样做。
+由于 setA 的值为[1, 2, 3]，setB 的值为[2, 3, 4]，上述代码和 new Set([1, 2, 3,
+2, 3, 4])是一样的，但集合中每种值只会有一个。
+
+交集
+console.log(new Set([...setA].filter(x => setB.has(x))));
+
+上面的代码同样将 setA 转化为了一个数组，并使用了 filter 方法，它会返回一个新数组，
+包含能通过回调函数检测的值——在本示例中验证了元素是否也存在于 setB 中。返回的数组会
+用来初始化结果集合。
+
+差集
+console.log(new Set([...setA].filter(x => !setB.has(x))));
+
+代码和求交集的运算很相似，不同之处在于我们需要的是不存在于 setB 中的元素。
+
+```
+
+######  5.多重集或袋
+
+```
+	集合数据结构不允许存在重复的元素。但是，在数学中，有一个叫作多重集的概念，它允许我们向集合中插入之前已经添加过的元素。多重集（或袋）在计算集合中元素的出现次数时很有用。它也在数据库系统中得到了广泛运用。
+```
 
 
-##### 04.集合
+
+### 05.字典和散列表
+
+###### 1.概念
+
+```
+	继续学习使用字典和散列表来存储唯一值（不重复的值）的数据结构。在集合中，我们感兴趣的是每个值本身，并把它当作主要元素。在字典（或映射）中，我们用[键，值]对的形式来存储数据。在散列表中也是一样（也是以[键，值]对的形式来存储数据）。但是两种数据结构的实现方式略有不同，例如字典中的每个键只能有一个值.
+```
+
+
+
+###### 2.意义
 
 ```
 
 ```
 
-##### 05.字典和散列表
+
+
+
+
+
+
+
+
+### 06.递归
+
+
 
 ```
 
 ```
 
-##### 06.递归
+### 07.树
 
 ```
 
 ```
 
-##### 07.树
+### 08.二叉树和堆排序
 
 ```
 
 ```
 
-##### 08.二叉树和堆排序
+### 09.图
 
 ```
 
 ```
 
-##### 09.图
+### 10.排序和搜索算法
 
 ```
 
 ```
 
-##### 10.排序和搜索算法
+### 11.算法设计与技巧
 
 ```
 
 ```
 
-##### 11.算法设计与技巧
+### 12.算法复杂度
 
 ```
 
 ```
 
-##### 12.算法复杂度
-
-```
-
-```
-
-##### 13.最后的话
+### 13.最后的话
 
 ```
 
