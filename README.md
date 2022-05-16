@@ -915,12 +915,345 @@ console.log(new Set([...setA].filter(x => !setB.has(x))));
 ###### 3.创建字典类
 
 ```
+function defaultToString(item) {
+  if (item === null) {
+    return 'NULL'
+  } else if (item === undefined) {
+    return 'UNDEFINED'
+  } else if (typeof item === 'string' || item instanceof String) {
+    return `${item}`
+  }
+  return item.toString()
+}
+
+class ValuePair {
+  constructor(key, value) {
+    this.key = key
+    this.value = value
+  }
+  toString() {
+    return `[#${this.key}: ${this.value}]`
+  }
+}
+
+class Dictionary {
+  constructor(toStrFn = defaultToString) {
+    this.toStrFn = toStrFn
+    this.table = {}
+  }
+  hasKey(key) {
+    return this.table[this.toStrFn(key)] != null
+  }
+  set(key, value) {
+    if (key != null && value != null) {
+      const tableKey = this.toStrFn(key)
+      this.table[tableKey] = new ValuePair(key, value)
+      return true
+    }
+    return false
+  }
+  remove(key) {
+    if (this.hasKey(key)) {
+      delete this.table[this.toStrFn(key)]
+      return true
+    }
+    return false
+  }
+  get(key) {
+    const valuePair = this.table[this.toStrFn(key)]
+    return valuePair == null ? undefined : valuePair.value
+  }
+  keyValues() {
+    return Object.values(this.table)
+  }
+  keys() {
+    return this.keyValues().map((valuePair) => valuePair.key)
+  }
+  values() {
+    return this.keyValues().map((valuePair) => valuePair.value)
+  }
+  forEach(callbackFn) {
+    const valuePairs = this.keyValues()
+    for (let i = 0; i < valuePairs.length; i++) {
+      const result = callbackFn(valuePairs[i].key, valuePairs[i].value)
+      if (result === false) {
+        break
+      }
+    }
+  }
+  size() {
+    return Object.keys(this.table).length
+  }
+  isEmpty() {
+    return this.size() === 0
+  }
+  clear() {
+    this.table = {}
+  }
+  toString() {
+    if (this.isEmpty()) {
+      return ''
+    }
+    const valuePairs = this.keyValues()
+    let objString = `${valuePairs[0].toString()}`
+    for (let i = 1; i < valuePairs.length; i++) {
+      objString = `${objString},${valuePairs[i].toString()}`
+    }
+    return objString
+  }
+}
+
+const dictionary = new Dictionary()
+dictionary.set('Gandalf', 'gandalf@email.com')
+dictionary.set('John', 'johnsnow@email.com')
+dictionary.set('Tyrion', 'tyrion@email.com')
+dictionary.remove('John')
+dictionary.forEach((k, v) => {
+  console.log('forEach: ', `key: ${k}, value: ${v}`)
+})
 
 ```
 
+###### 4.散列表
+
+概念:
+
+```
+	HashTable 类，也叫 HashMap 类，它是 Dictionary 类的一种散列表实现方式
+	散列算法的作用是尽可能快地在数据结构中找到一个值。在之前的章节中，你已经知道如果要在数据结构中获得一个值（使用 get 方法），需要迭代整个数据结构来找到它。如果使用散列函数，就知道值的具体位置，因此能够快速检索到该值。散列函数的作用是给定一个键值，然后
+返回值在表中的地址。
+
+```
+
+意义:
+
+```
+	散列表有一些在计算机科学中应用的例子。因为它是字典的一种实现，所以可以用作关联数组。它也可以用来对数据库进行索引。当我们在关系型数据库（如 MySQL、Microsoft SQL Server、Oracle，等等）中创建一个新的表时，一个不错的做法是同时创建一个索引来更快地查询到记录的 key。在这种情况下，散列表可以用来保存键和对表中记录的引用。另一个很常见的应用是使用散列表来表示对象。JavaScript 语言内部就是使用散列表来表示每个对象。此时，对象的每个属性和方法（成员）被存储为 key 对象类型，每个 key 指向对应的对象成员。
+```
+
+创建:
+
+```
+const { defaultToString, ValuePair } = require('./01.创建字典类')
+class HashTable {
+  constructor(toStrFn = defaultToString) {
+    this.toStrFn = toStrFn
+    this.table = {}
+  }
+  loseloseHashCode(key) {
+    if (typeof key === 'number') {
+      return key
+    }
+    const tableKey = this.toStrFn(key)
+    let hash = 0
+    for (let i = 0; i < tableKey.length; i++) {
+      hash += tableKey.charCodeAt(i)
+    }
+    return hash % 37 //为了得到比较小的数值，我们会使用 hash 值和一个任意数做除法的余数）——这可以规避操作数超过数值变量最大表示范围的风险。
+  }
+  hashCode(key) {
+    return this.loseloseHashCode(key)
+  }
+  put(key, value) {
+    if (key != null && value != null) {
+      const position = this.hashCode(key)
+      this.table[position] = new ValuePair(key, value)
+      return true
+    }
+    return false
+  }
+  get(key) {
+    const valuePair = this.table[this.hashCode(key)]
+    return valuePair == null ? undefined : valuePair.value
+  }
+  remove(key) {
+    const hash = this.hashCode(key)
+    const valuePair = this.table[hash]
+    if (valuePair != null) {
+      delete this.table[hash]
+      return true
+    }
+    return false
+  }
+}
+
+const hash = new HashTable()
+hash.put('Gandalf', 'gandalf@email.com')
+hash.put('John', 'johnsnow@email.com')
+hash.put('Tyrion', 'tyrion@email.com')
+console.log(hash.hashCode('Gandalf') + ' - Gandalf')
+console.log(hash.hashCode('John') + ' - John')
+console.log(hash.hashCode('Tyrion') + ' - Tyrion')
+console.log(hash.get('Gandalf'))
+
+```
+
+###### 5.散列集合
+
+概念:
+
+```
+在一些编程语言中，还有一种叫作散列集合的实现。散列集合由一个集合构成，但是插入、移除或获取元素时，使用的是 hashCode 函数。我们可以复用本章中实现的所有代码来实现散列集合，不同之处在于，不再添加键值对，而是只插入值而没有键。例如，可以使用散列集合来存储所有的英语单词（不包括它们的定义）。和集合相似，散列集合只存储不重复的唯一值。
+```
+
+###### 6.处理散列表中的冲突
+
+概念:
+
+```
+	有时候，一些键会有相同的散列值。不同的值在散列表中对应相同位置的时候，我们称其为冲突。
+```
+
+冲突:
+
+```
+const hash = new HashTable();
+hash.put('Ygritte', 'ygritte@email.com');
+hash.put('Jonathan', 'jonathan@email.com');
+hash.put('Jamie', 'jamie@email.com');
+hash.put('Jack', 'jack@email.com');
+hash.put('Jasmine', 'jasmine@email.com');
+hash.put('Jake', 'jake@email.com');
+hash.put('Nathan', 'nathan@email.com');
+hash.put('Athelstan', 'athelstan@email.com');
+hash.put('Sue', 'sue@email.com');
+hash.put('Aethelwulf', 'aethelwulf@email.com');
+hash.put('Sargeras', 'sargeras@email.com');
+通过对每个提到的名字调用 hash.hashCode 方法，输出结果如下。
+4 - Ygritte
+5 - Jonathan
+5 - Jamie
+7 - Jack
+8 - Jasmine
+9 - Jake
+10 - Nathan
+7 - Athelstan
+5 - Sue
+5 - Aethelwulf
+10 - Sargeras 
+注意，Nathan 和 Sargeras 有相同的散列值（10）。Jack 和 Athelstan 有相同的散列值（7），Jonathan、Jamie、Sue 和 Aethelwulf 也有相同的散列值（5）。
+
+在调用 console.log(hashTable.toString())后，我们会在控制台中得到下面的输出结果。
+{4 => [#Ygritte: ygritte@email.com]}
+{5 => [#Aethelwulf: aethelwulf@email.com]}
+{7 => [#Athelstan: athelstan@email.com]}
+{8 => [#Jasmine: jasmine@email.com]}
+{9 => [#Jake: jake@email.com]}
+{10 => [#Sargeras: sargeras@email.com]}
+
+Jonathan、Jamie、Sue 和 Aethelwulf 有相同的散列值，也就是 5。由于 Aethelwulf是最后一个被添加的，它将是在 HashTable 实例中占据位置 5 的元素。首先 Jonathan 会占据这个位置，然后 Jamie 会覆盖它，Sue 会再次覆盖，最后 Aethelwulf 会再覆盖一次。这对于其他发生冲突的元素来说也是一样的。
+```
+
+意义:
+
+```js
+	使用一个数据结构来保存数据的目的显然不是丢失这些数据，而是通过某种方法将它们全部保存起来。因此，当这种情况发生的时候就要去解决。处理冲突有几种方法：分离链接、线性探查和双散列法。
+```
+
+分离链接
+
+分离链接法包括为散列表的每一个位置创建一个链表并将元素存储在里面。它是解决冲突的最简单的方法，但是在 HashTable 实例之外还需要额外的存储空间。
+
+```
+const { HashTable } = require('./02.散列表')
+const { defaultToString, ValuePair } = require('./01.创建字典类')
+const { LinkedList } = require('../03.链表/01.创建链表')
+// 1. 分离链接
+class HashTableSeparateChaining extends HashTable {
+  constructor(toStrFn = defaultToString) {
+    this.toStrFn = toStrFn
+    this.table = {}
+  }
+  // 重写 HashTable的 put
+  put(key, value) {
+    if (key != null && value != null) {
+      const position = this.hashCode(key)
+      if (this.table[position] == null) {
+        this.table[position] = new LinkedList()
+      }
+      this.table[position].push(new ValuePair(key, value))
+      return true
+    }
+    return false
+  }
+  get(key) {
+    const position = this.hashCode(key)
+    const linkedList = this.table[position]
+    if (linkedList != null && !linkedList.isEmpty()) {
+      let current = linkedList.getHead()
+      while (current != null) {
+        if (current.element.key === key) {
+          return current.element.value
+        }
+        current = current.next
+      }
+    }
+    return undefined
+  }
+  remove(key) {
+    const position = this.hashCode(key)
+    const linkedList = this.table[position]
+    if (linkedList != null && !linkedList.isEmpty()) {
+      let current = linkedList.getHead()
+      while (current != null) {
+        if (current.element.key === key) {
+          linkedList.remove(current.element)
+          if (linkedList.isEmpty()) {
+            delete this.table[position]
+          }
+          return true
+        }
+        current = current.next
+      }
+    }
+    return false
+  }
+}
+```
+
+ 线性探查
+
+ 	另一种解决冲突的方法是线性探查。之所以称作线性，是因为它处理冲突的方法是将元素直 接存储到表中，而不是在单独的数据结构中。 当想向表中某个位置添加一个新元素的时候，如果索引为 position 的位置已经被占据了, 就尝试 position+1 的位置。如果 position+1 的位置也被占据了，就尝试 position+2 的位 置，以此类推，直到在散列表中找到一个空闲的位置。想象一下，有一个已经包含一些元素的散 列表，我们想要添加一个新的键和值。我们计算这个新键的 hash，并检查散列表中对应的位置 是否被占据。如果没有，我们就将该值添加到正确的位置。如果被占据了，我们就迭代散列表， 直到找到一个空闲的位置。
+
+​	线性探查技术分为两种。第一种是软删除方法。我们使用一个特殊的值（标记）来表示键 值对被删除了（惰性删除或软删除），而不是真的删除它。经过一段时间，散列表被操作过后， 我们会得到一个标记了若干删除位置的散列表。这会逐渐降低散列表的效率，因为搜索键值会 随时间变得更慢。能快速访问并找到一个键是我们使用散列表的一个重要原因。
+
+​	第二种方法需要检验是否有必要将一个或多个元素移动到之前的位置。当搜索一个键的时 候，这种方法可以避免找到一个空位置。如果移动元素是必要的，我们就需要在散列表中挪动键 值对。
 
 
 
+###### 7.创建更好的散列函数
+
+```
+	我们实现的 lose lose 散列函数并不是一个表现良好的散列函数，因为它会产生太多的冲突。一个表现良好的散列函数是由几个方面构成的：插入和检索元素的时间（即性能），以及较低的冲突可能性。我们可以在网上找到一些不同的实现方法，也可以实现自己的散列函数。
+另一个可以实现的、比 lose lose 更好的散列函数是 djb2。
+  	djb2HashCode(key) {
+ 		const tableKey = this.toStrFn(key); // {1}
+ 		let hash = 5381; // {2}
+ 		for (let i = 0; i < tableKey.length; i++) { // {3}
+ 		hash = (hash * 33) + tableKey.charCodeAt(i); // {4}
+ 	}
+ return hash % 1013; // {5}
+}
+	在将键转化为字符串之后（行{1}），djb2HashCode 方法包括初始化一个 hash 变量并赋值为一个质数（行{2}——大多数实现都使用 5381），然后迭代参数 key（行{3}），将 hash 与 33相乘（用作一个幻数①幻数在编程中指直接使用的常数。），并和当前迭代到的字符的 ASCII 码值相加（行{4}）。最后，我们将使用相加的和与另一个随机质数相除的余数（行{5}），比我们认为的散列表大小要大。在本例中，我们认为散列表的大小为 1000。
+
+这并不是最好的散列函数，但这是最受社区推崇的散列函数之一。
+```
+
+###### 8.ES2015 Map 类
+
+```
+	ECMAScript 2015 新增了 Map 类。可以基于 ES2015 的 Map 类开发我们的 Dictionary 类。
+```
+
+###### 9.ES2105 WeakMap 类和 WeakSet 类
+
+```
+	除了 Set 和 Map 这两种新的数据结构，ES2015还增加了它们的弱化版本，WeakSet 和 WeakMap。
+	基本上，Map 和 Set 与其弱化版本之间仅有的区别是：
+		 WeakSet 或 WeakMap 类没有 entries、keys 和 values 等方法；
+		 只能用对象作为键。
+	创建和使用这两个类主要是为了性能。WeakSet 和 WeakMap 是弱化的（用对象作为键），没有强引用的键。这使得 JavaScript 的垃圾回收器可以从中清除整个入口。另一个优点是，必须用键才可以取出值。这些类没有 entries、keys 和 values 等迭代器方法，因此，除非你知道键，否则没有办法取出值
+```
 
 
 
