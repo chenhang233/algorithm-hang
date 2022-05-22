@@ -1265,12 +1265,84 @@ class HashTableSeparateChaining extends HashTable {
 	递归是一种解决问题的方法，它从解决问题的各个小部分开始，直到解决最初的大问题(归化思想)。递归通常涉及函数调用自身。或者间接调用自身.
 ```
 
+##### 2.递归阶乘
 
+```
+// 求 5 的阶乘 表示为 5!
 
+function factorial(n) {
+  if (n === 1) {
+    return 1
+  }
+  // 计算 n - 1 的阶乘是我们计算原始问题 n!的一个子问题
+  return n * factorial(n - 1)
+}
 
+console.log(factorial(5))
+```
+
+###### 3.斐波那契数列
+
+​	斐波那契数列是另一个可以用递归解决的问题。它是一个由 0、1、1、2、3、5、8、13、21、34 等数组成的序列。数 2 由 1 + 1 得到，数 3 由 1 + 2 得到，数 5 由 2 + 3 得到，以此类推。斐波那契数列的定义如下。
+​	 位置 0 的斐波那契数是零。
+​	 1 和 2 的斐波那契数是 1。
+​	 n（此处 n > 2）的斐波那契数是（n  1）的斐波那契数加上（n  2）的斐波那契数。
+
+​	
+
+```
+ 迭代求斐波那契数
+function fibonacciIterative(n) {
+  if (n < 1) return 0
+  if (n <= 2) return 1
+  let fibNMinus2 = 0
+  let fibNMinus1 = 1
+  let fibN = n
+  for (let i = 2; i <= n; i++) {
+    // n >= 2
+    fibN = fibNMinus1 + fibNMinus2 // f(n-1) + f(n-2)
+    fibNMinus2 = fibNMinus1
+    fibNMinus1 = fibN
+  }
+  return fibN
+}
+
+console.log(fibonacciIterative(2))
 
 ```
 
+```
+递归求斐波那契数
+function fibonacciIterative2(n) {
+  if (n < 1) return 0
+  if (n <= 2) return 1
+  return fibonacciIterative2(n - 1) + fibonacciIterative2(n - 2)
+}
+```
+
+###### 4.记忆化斐波那契数
+
+还有第三种写 fibonacci 函数的方法，叫作记忆化。记忆化是一种保存前一个结果的值的 优化技术，类似于缓存。如果我们分析在计算 fibonacci(5)时的调用，会发现 fibonacci(3) 被计算了两次，因此可以将它的结果存储下来，这样当需要再次计算它的时候，我们就已经有它 的结果了。
+
+```
+function fibonacciMemoization(n) {
+  const memo = [0, 1]
+  const fibonacci = (n) => {
+    if (memo[n] != null) return memo[n]
+    return (memo[n] = fibonacci(n - 1) + fibonacci(n - 2))
+  }
+  return fibonacci(n)
+}
+
+console.log(fibonacciMemoization(3))
+console.log(fibonacciMemoization(6))
+
+```
+
+###### 5. 为什么要用递归？它更快吗
+
+```
+	迭代的版本比递归的版本快很多，所以这表示递归更慢。但是，再看看三个不同版本的代码。递归版本更容易理解，需要的代码通常也更少。另外，对一些算法来说，迭代的解法可能不可用，而且有了尾调用优化，递归的多余消耗甚至可能被消除。所以，我们经常使用递归，因为用它来解决问题会更简单。
 ```
 
 ### 07.树
