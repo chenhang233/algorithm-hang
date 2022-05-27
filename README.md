@@ -1551,6 +1551,130 @@ Adelson-Velskii-Landi 树（AVL 树）
 ​	在 AVL 树中，需要对每个节点计算右子树高度（hr）和左子树高度（hl）之间的差值，该 值（hr－hl）应为 0、1 或 -1。如果结果不是这三个值之一，则需要平衡该 AVL 树。这就是平衡 因子的概念。
 
 ```
+const { BinarySearchTree, defaultCompare, Compare, Node } = require('./01.创建 BinarySearchTree 类')
+
+const BalanceFactor = {
+  UNBALANCED_RIGHT: 1, // 右边不平衡
+  SLIGHTLY_UNBALANCED_RIGHT: 2, // 右边稍微不平衡
+  BALANCED: 3, // 平衡
+  SLIGHTLY_UNBALANCED_LEFT: 4, // 左边稍微不平衡
+  UNBALANCED_LEFT: 5, // 左边平衡
+}
+class AVLTree extends BinarySearchTree {
+  constructor(compareFn = defaultCompare) {
+    super(compareFn)
+    this.compareFn = compareFn
+    this.root = null
+  }
+  //   计算一个节点高度
+  getNodeHeight(node) {
+    if (node == null) {
+      return -1
+    }
+    return Math.max(this.getNodeHeight(node.left), this.getNodeHeight(node.right)) + 1
+  }
+  // 遵循计算一个节点的平衡因子并返回其值
+  getBalanceFactor(node) {
+    const heightDifference = this.getNodeHeight(node.left) - this.getNodeHeight(node.right)
+    switch (heightDifference) {
+      case -2:
+        return BalanceFactor.UNBALANCED_RIGHT
+      case -1:
+        return BalanceFactor.SLIGHTLY_UNBALANCED_RIGHT
+      case 1:
+        return BalanceFactor.SLIGHTLY_UNBALANCED_LEFT
+      case 2:
+        return BalanceFactor.UNBALANCED_LEFT
+      default:
+        return BalanceFactor.BALANCED
+    }
+  }
+  // 左-左（LL）：向右的单旋转
+  rotationLL(node) {
+    const tmp = node.left
+    node.left = tmp.right
+    tmp.right = node
+    return tmp
+  }
+  // 右-右（RR）：向左的单旋转
+  rotationRR(node) {
+    const tmp = node.right
+    node.right = tmp.left
+    tmp.left = node
+    return tmp
+  }
+  //   左-右（LR）：向右的双旋转
+  rotationLR(node) {
+    node.left = this.rotationRR(node.left)
+    return this.rotationLL(node)
+  }
+  //  右-左（RL）：向左的双旋转
+  rotationRL(node) {
+    node.right = this.rotationLL(node.right)
+    return this.rotationRR(node)
+  }
+  insert(key) {
+    this.root = this.insertNode(this.root, key)
+  }
+  // 向 AVL(自平衡) 树插入节点
+  insertNode(node, key) {
+    // 像在 BST(搜索树) 树中一样插入节点
+    if (node == null) {
+      return new Node(key)
+    } else if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
+      node.left = this.insertNode(node.left, key)
+    } else if (this.compareFn(key, node.key) === Compare.BIGGER_THAN) {
+      node.right = this.insertNode(node.right, key)
+    } else {
+      return node // 重复的键
+    }
+    // 如果需要，将树进行平衡操作
+    const balanceFactor = this.getBalanceFactor(node)
+    if (balanceFactor === BalanceFactor.UNBALANCED_LEFT) {
+      if (this.compareFn(key, node.left.key) === Compare.LESS_THAN) {
+        node = this.rotationLL(node)
+      } else {
+        return this.rotationLR(node)
+      }
+    }
+    if (balanceFactor === BalanceFactor.UNBALANCED_RIGHT) {
+      if (this.compareFn(key, node.right.key) === Compare.BIGGER_THAN) {
+        node = this.rotationRR(node)
+      } else {
+        return this.rotationRL(node)
+      }
+    }
+    return node
+  }
+  // . 从 AVL 树中移除节点
+  removeNode(node, key) {
+    node = super.removeNode(node, key)
+    if (node == null) {
+      return node // null，不需要进行平衡
+    }
+    // 检测树是否平衡
+    const balanceFactor = this.getBalanceFactor(node)
+    if (balanceFactor === BalanceFactor.UNBALANCED_LEFT) {
+      const balanceFactorLeft = this.getBalanceFactor(node.left)
+      if (balanceFactorLeft === BalanceFactor.BALANCED || balanceFactorLeft === BalanceFactor.SLIGHTLY_UNBALANCED_LEFT) {
+        return this.rotationLL(node)
+      }
+      if (balanceFactorLeft === BalanceFactor.SLIGHTLY_UNBALANCED_RIGHT) {
+        return this.rotationLR(node.left)
+      }
+    }
+    if (balanceFactor === BalanceFactor.UNBALANCED_RIGHT) {
+      const balanceFactorRight = this.getBalanceFactor(node.right)
+      if (balanceFactorRight === BalanceFactor.BALANCED || balanceFactorRight === BalanceFactor.SLIGHTLY_UNBALANCED_RIGHT) {
+        return this.rotationRR(node)
+      }
+      if (balanceFactorRight === BalanceFactor.SLIGHTLY_UNBALANCED_LEFT) {
+        return this.rotationRL(node.right)
+      }
+    }
+    return node
+  }
+}
 
 ```
 
@@ -1566,6 +1690,160 @@ Adelson-Velskii-Landi 树（AVL 树）
 3. 左右（LR）：向右的双旋转（先 LL 旋转，再 RR 旋转）
 4. 右左（RL）：向左的双旋转（先 RR 旋转，再 LL 旋转）
 ```
+
+###### 07.红黑树
+
+​	和 AVL 树一样，红黑树也是一个自平衡二叉搜索树。我们学习了对 AVL 书插入和移除节点 可能会造成旋转，所以我们需要一个包含多次插入和删除的自平衡树，红黑树是比较好的。如果 插入和删除频率较低（我们更需要多次进行搜索操作），那么 AVL 树比红黑树更好。
+
+```
+在红黑树中，每个节点都遵循以下规则：
+(1) 顾名思义，每个节点不是红的就是黑的；
+(2) 树的根节点是黑的；
+(3) 所有叶节点都是黑的（用 NULL 引用表示的节点）；
+(4) 如果一个节点是红的，那么它的两个子节点都是黑的；
+(5) 不能有两个相邻的红节点，一个红节点不能有红的父节点或子节点；
+(6) 从给定的节点到它的后代节点（NULL 叶节点）的所有路径包含相同数量的黑色节点。
+```
+
+```
+const { BinarySearchTree, defaultCompare, Compare, Node } = require('./01.创建 BinarySearchTree 类')
+const Colors = {
+  RED: 'red',
+  BLACK: 'black',
+}
+class RedBlackNode extends Node {
+  constructor(key) {
+    super(key)
+    this.key = key
+    this.color = Colors.RED
+    this.parent = null
+  }
+  isRed() {
+    return this.color === Colors.RED
+  }
+}
+
+class RedBlackTree extends BinarySearchTree {
+  constructor(compareFn = defaultCompare) {
+    super(compareFn)
+    this.compareFn = compareFn
+    this.root = null
+  }
+  insert(key) {
+    if (this.root == null) {
+      this.root = new RedBlackNode(key)
+      this.root.color = Colors.BLACK
+    } else {
+      const newNode = this.insertNode(this.root, key)
+      this.fixTreeProperties(newNode)
+    }
+  }
+  // 重写的 insertNode 方法
+  insertNode(node, key) {
+    if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
+      if (node.left == null) {
+        node.left = new RedBlackNode(key)
+        node.left.parent = node
+        return node.left
+      } else {
+        return this.insertNode(node.left, key)
+      }
+    } else if (node.right == null) {
+      node.right = new RedBlackNode(key)
+      node.right.parent = node
+      return node.right
+    } else {
+      return this.insertNode(node.right, key)
+    }
+  }
+  // 在插入节点后验证红黑树属性
+  fixTreeProperties(node) {
+    while (node && node.parent && node.parent.isRed() && node.color !== Colors.BLACK) {
+      let parent = node.parent
+      const grandParent = parent.parent
+      // 情形 A：父节点是左侧子节点
+      if (grandParent && grandParent.left === parent) {
+        // {5}
+        const uncle = grandParent.right // {6}
+        // 情形 1A：叔节点也是红色——只需要重新填色
+        if (uncle && uncle.color === Colors.RED) {
+          // {7}
+          grandParent.color = Colors.RED
+          parent.color = Colors.BLACK
+          uncle.color = Colors.BLACK
+          node = grandParent // {8}
+        } else {
+          // 情形 2A：节点是右侧子节点——左旋转
+          // 情形 3A：节点是左侧子节点——右旋转
+        }
+      } else {
+        // 情形 B：父节点是右侧子节点
+        const uncle = grandParent.left // {9}
+        // 情形 1B：叔节点是红色——只需要重新填色
+        if (uncle && uncle.color === Colors.RED) {
+          // {10}
+          grandParent.color = Colors.RED
+          parent.color = Colors.BLACK
+          uncle.color = Colors.BLACK
+          node = grandParent
+        } else {
+          // 情形 2B：节点是左侧子节点——右旋转
+          // 情形 3B：节点是右侧子节点——左旋转
+        }
+      }
+    }
+    this.root.color = Colors.BLACK // {11}
+  }
+  rotationLL(node) {
+    const tmp = node.left
+    node.left = tmp.right
+    if (tmp.right && tmp.right.key) {
+      tmp.right.parent = node
+    }
+    tmp.parent = node.parent
+    if (!node.parent) {
+      this.root = tmp
+    } else {
+      if (node === node.parent.left) {
+        node.parent.left = tmp
+      } else {
+        node.parent.right = tmp
+      }
+    }
+    tmp.right = node
+    node.parent = tmp
+  }
+  rotationRR(node) {
+    const tmp = node.right
+    node.right = tmp.left
+    if (tmp.left && tmp.left.key) {
+      tmp.left.parent = node
+    }
+    tmp.parent = node.parent
+    if (!node.parent) {
+      this.root = tmp
+    } else {
+      if (node === node.parent.left) {
+        node.parent.left = tmp
+      } else {
+        node.parent.right = tmp
+      }
+    }
+    tmp.left = node
+    node.parent = tmp
+  }
+}
+
+const b = new RedBlackTree()
+b.insert(1)
+b.insert(2)
+b.insert(3)
+b.insert(4)
+console.log(b.root)
+
+```
+
+
 
 
 

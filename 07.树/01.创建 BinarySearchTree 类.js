@@ -150,7 +150,7 @@ class BinarySearchTree {
     }
   }
 }
-module.exports = { BinarySearchTree, defaultCompare, Compare }
+module.exports = { BinarySearchTree, defaultCompare, Compare, Node }
 const tree = new BinarySearchTree()
 tree.insert(11)
 tree.insert(7)
