@@ -1845,19 +1845,177 @@ console.log(b.root)
 
 
 
-
-
-
-
-
-
 ### 08.二叉树和堆排序
 
+###### 1.概念
+
+```
+	种特殊的二叉树，也就是堆数据结构，也叫作二叉堆。二叉堆是计算机科学中一种非常著名的数据结构，由于它能高效、快速地找出最大值和最小值，常被应用于优先队列。它也被用于著名的堆排序算法中。
+```
+
+###### 2.二叉堆数据结构
+
+```
+	1.它是一棵完全二叉树，表示树的每一层都有左侧和右侧子节点（除了最后一层的叶节点），并且最后一层的叶节点尽可能都是左侧子节点，这叫作结构特性。
+	2.二叉堆不是最小堆就是最大堆。最小堆允许你快速导出树的最小值，最大堆允许你快速导出树的最大值。所有的节点都大于等于（最大堆）或小于等于（最小堆）每个它的子节点。这叫作堆特性.
+	2.尽管二叉堆是二叉树，但并不一定是二叉搜索树（BST）。在二叉堆中，每个子节点都要大于等于父节点（最小堆）或小于等于父节点（最大堆）。然而在二叉搜索树中，左侧子节点总是比父节点小，右侧子节点也总是更大。
+```
+
+###### 3. 二叉树的数组表示
+
+​	二叉树有两种表示方式。第一种是使用一个动态的表示方式，也就是指针（用节点表示），在上一章使用过。第二种是使用一个数组，通过索引值检索父节点、左侧和右侧子节点的值.
+
+```
+	对于给定位置 index 的节点：
+1. 它的左侧子节点的位置是 2 * index + 1（如果位置可用）；
+2. 它的右侧子节点的位置是 2 * index + 2（如果位置可用）；
+3. 它的父节点位置是 (index - 1) / 2 向下取整（如果位置可用）。
 ```
 
 ```
+const Compare = {
+  LESS_THAN: -1,
+  BIGGER_THAN: 1,
+}
+function defaultCompare(a, b) {
+  if (a === b) {
+    return 0
+  }
+  return a < b ? Compare.LESS_THAN : Compare.BIGGER_THAN
+}
+const swap = (array, a, b) => ([array[a], array[b]] = [array[b], array[a]])
+class MinHeap {
+  constructor(compareFn = defaultCompare) {
+    this.compareFn = compareFn
+    this.heap = []
+  }
+  getLeftIndex(index) {
+    return 2 * index + 1
+  }
+  getRightIndex(index) {
+    return 2 * index + 2
+  }
+  getParentIndex(index) {
+    if (index === 0) {
+      return undefined
+    }
+    return Math.floor((index - 1) / 2)
+  }
+  // 向堆中插入新值
+  insert(value) {
+    if (value != null) {
+      this.heap.push(value)
+      this.siftUp(this.heap.length - 1)
+      return true
+    }
+    return false
+  }
+  //   上移操作
+  siftUp(index) {
+    let parent = this.getParentIndex(index)
+    while (index > 0 && this.compareFn(this.heap[parent], this.heap[index]) > Compare.LESS_THAN) {
+      swap(this.heap, parent, index)
+      index = parent
+      parent = this.getParentIndex(index)
+    }
+  }
+  size() {
+    return this.heap.length
+  }
+  isEmpty() {
+    return this.size() === 0
+  }
+  // 从堆中找到最小值或最大值
+  findMinimum() {
+    return this.isEmpty() ? undefined : this.heap[0]
+  }
+  //  导出堆中的最小值或最大值 删除
+  extract() {
+    if (this.isEmpty()) {
+      return undefined
+    }
+    if (this.size() === 1) {
+      return this.heap.shift()
+    }
+    const removedValue = this.heap.shift()
+    this.siftDown(0)
+    return removedValue
+  }
+  // 下移操作（堆化）
+  siftDown(index) {
+    let element = index
+    const left = this.getLeftIndex(index)
+    const right = this.getRightIndex(index)
+    const size = this.size()
+    if (left < size && this.compareFn(this.heap[element], this.heap[left]) < Compare.BIGGER_THAN) {
+      element = left
+    }
+    if (right < size && this.compareFn(this.heap[element], this.heap[right]) < Compare.BIGGER_THAN) {
+      element = right
+    }
+    if (index !== element) {
+      swap(this.heap, index, element)
+      this.siftDown(element)
+    }
+  }
+}
+heap = new MinHeap()
+for (let i = 1; i < 10; i++) {
+  heap.insert(i)
+}
+console.log('Extract minimum: ', heap.extract()) // 1
+
+```
+
+###### 04.堆排序算法
+
+```
+function heapSort(array, compareFn = defaultCompare) {
+  let heapSize = array.length
+  buildMaxHeap(array, compareFn)
+  while (heapSize > 1) {
+    swap(array, 0, --heapSize)
+    heapify(array, 0, heapSize, compareFn)
+  }
+  return array
+}
+
+function buildMaxHeap(array, compareFn) {
+  for (let i = Math.floor(array.length / 2); i >= 0; i -= 1) {
+    heapify(array, i, array.length, compareFn)
+  }
+  return array
+}
+	
+	堆排序算法不是一个稳定的排序算法，也就是说如果数组没有排好序，可能会得到不一样的结果。
+```
+
+
 
 ### 09.图
+
+###### 1.概念
+
+```
+	图是网络结构的抽象模型。图是一组由边连接的节点（或顶点）。学习图是重要的，因为任何二元关系都可以用图来表示。任何社交网络，例如 Facebook、Twitter 和 Google+，都可以用图来表示。我们还可以使用图来表示道路、航班以及通信，
+	一个图 G = (V, E)由以下元素组成。
+		V：一组顶点
+		E：一组边，连接 V 中的顶点
+```
+
+###### 2.术语
+
+```
+	1.由一条边连接在一起的顶点称为相邻顶点.
+	2.一个顶点的度是其相邻顶点的数量.
+	3.路径是顶点 v1, v2, …, vk的一个连续序列，其中 vi和 vi+1是相邻的.
+```
+
+
+
+
+
+
 
 ```
 

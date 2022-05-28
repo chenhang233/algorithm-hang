@@ -98,4 +98,5 @@ dictionary.forEach((k, v) => {
 module.exports = {
   defaultToString,
   ValuePair,
+  Dictionary,
 }
