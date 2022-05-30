@@ -39,6 +39,64 @@ const breadthFirstSearch = (graph, startVertex, callback) => {
     }
   }
 }
+// 改进过的广度优先方法
+const BFS = (graph, startVertex) => {
+  const vertices = graph.getVertices()
+  const adjList = graph.getAdjList()
+  const color = initializeColor(vertices)
+  const queue = new Queue()
+  const distances = {} // 表示距离
+  const predecessors = {} // 前溯点
+  queue.enqueue(startVertex)
+  for (let i = 0; i < vertices.length; i++) {
+    distances[vertices[i]] = 0
+    predecessors[vertices[i]] = null
+  }
+  while (!queue.isEmpty()) {
+    const u = queue.dequeue()
+    const neighbors = adjList.get(u)
+    color[u] = Colors.GREY
+    for (let i = 0; i < neighbors.length; i++) {
+      const w = neighbors[i]
+      if (color[w] === Colors.WHITE) {
+        color[w] = Colors.GREY
+        distances[w] = distances[u] + 1
+        predecessors[w] = u
+        queue.enqueue(w)
+      }
+    }
+    color[u] = Colors.BLACK
+  }
+  return {
+    distances,
+    predecessors,
+  }
+}
+// 深度优先算法
+const depthFirstSearch = (graph, callback) => {
+  const vertices = graph.getVertices()
+  const adjList = graph.getAdjList()
+  const color = initializeColor(vertices)
+  for (let i = 0; i < vertices.length; i++) {
+    if (color[vertices[i]] === Colors.WHITE) {
+      depthFirstSearchVisit(vertices[i], color, adjList, callback)
+    }
+  }
+}
+const depthFirstSearchVisit = (u, color, adjList, callback) => {
+  color[u] = Colors.GREY
+  if (callback) {
+    callback(u)
+  }
+  const neighbors = adjList.get(u)
+  for (let i = 0; i < neighbors.length; i++) {
+    const w = neighbors[i]
+    if (color[w] === Colors.WHITE) {
+      depthFirstSearchVisit(w, color, adjList, callback)
+    }
+  }
+  color[u] = Colors.BLACK
+}
 const graph = new Graph()
 const myVertices = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
 for (let i = 0; i < myVertices.length; i++) {
