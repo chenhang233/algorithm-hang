@@ -1,5 +1,13 @@
 ### js算法
 
+### 00.前言
+
+###### 1.为什么要学算法？
+
+# 算法——成为程序员强者的必经之路
+
+
+
 ### 01.栈(stack)
 
 ###### 0.LIFO(last-in，first-out)
@@ -2005,21 +2013,181 @@ function buildMaxHeap(array, compareFn) {
 
 ###### 2.术语
 
+![](C:\Users\19734\Desktop\algorithm-JS\images\Snipaste_2022-05-28_16-31-13.png)
+
 ```
 	1.由一条边连接在一起的顶点称为相邻顶点.
 	2.一个顶点的度是其相邻顶点的数量.
 	3.路径是顶点 v1, v2, …, vk的一个连续序列，其中 vi和 vi+1是相邻的.
+	4.简单路径要求不包含重复的顶点.
+	5.环也是一个简单路径，比如 A D C A（最后一个顶点重新回到 A）。
+	6.如果图中不存在环，则称该图是无环的。如果图中每两个顶点间都存在路径，则该图是连通的。
+```
+
+###### 3.有向图和无向图
+
+​	图可以是无向的（边没有方向）或是有向的（有向图）。如下图所示，有向图的边有一个方向。如果图中每两个顶点间在双向上都存在路径，则该图是强连通的。例如，C 和 D 是强连通的， 而 A 和 B 不是强连通的。
+
+![](C:\Users\19734\Desktop\algorithm-JS\images\Snipaste_2022-05-28_16-35-12.png)
+
+
+
+图还可以是未加权的（目前为止我们看到的图都是未加权的）或是加权的。如下图所示，加 权图的边被赋予了权值。
+
+![](C:\Users\19734\Desktop\algorithm-JS\images\Snipaste_2022-05-28_16-36-06.png)
+
+
+
+```
+	我们可以使用图来解决计算机科学世界中的很多问题，比如搜索图中的一个特定顶点或搜索一条特定边，寻找图中的一条路径（从一个顶点到另一个顶点），寻找两个顶点之间的最短路径，以及环检测。
+```
+
+###### 4.邻接矩阵
+
+```
+	图最常见的实现是邻接矩阵。每个节点都和一个整数相关联，该整数将作为数组的索引。我们用一个二维数组来表示顶点之间的连接。如果索引为 i 的节点和索引为 j 的节点相邻，则array[i][j] === 1，否则 array[i][j] === 0
+
+	不是强连通的图（稀疏图）如果用邻接矩阵来表示，则矩阵中将会有很多 0，这意味着我们浪费了计算机存储空间来表示根本不存在的边。例如，找给定顶点的相邻顶点，即使该顶点只有一个相邻顶点，我们也不得不迭代一整行。邻接矩阵表示法不够好的另一个理由是，图中顶点的
+数量可能会改变，而二维数组不太灵活
 ```
 
 
 
+![](C:\Users\19734\Desktop\algorithm-JS\images\Snipaste_2022-05-28_16-41-02.png)
 
 
 
+
+
+###### 05.邻接表
+
+```
+	我们也可以使用一种叫作邻接表的动态数据结构来表示图。邻接表由图中每个顶点的相邻顶点列表所组成。存在好几种方式来表示这种数据结构。我们可以用列表（数组）、链表，甚至是散列表或是字典来表示相邻顶点列表。
+	尽管邻接表可能对大多数问题来说都是更好的选择，但以上两种表示法都很有用，且它们有着不同的性质（例如，要找出顶点 v 和 w 是否相邻，使用邻接矩阵会比较快）。
+```
+
+![](C:\Users\19734\Desktop\algorithm-JS\images\Snipaste_2022-05-28_16-42-37.png)
+
+###### 06.关联矩阵
+
+```
+	还可以用关联矩阵来表示图。在关联矩阵中，矩阵的行表示顶点，列表示边。如下图所示，使用二维数组来表示两者之间的连通性，如果顶点 v 是边 e 的入射点，则 array[v][e] === 1；否则，array[v][e] === 0。
+	关联矩阵通常用于边的数量比顶点多的情况，以节省空间和内存。
+```
+
+![](C:\Users\19734\Desktop\algorithm-JS\images\Snipaste_2022-05-28_16-44-09.png)
+
+###### 07.创建 Graph 类
+
+```
+const { Dictionary } = require('../05.字典/01.创建字典类')
+
+class Graph {
+  constructor(isDirected = false) {
+    this.isDirected = isDirected //图是否有向
+    this.vertices = [] // 存储图中所有顶点的名字
+    this.adjList = new Dictionary() // 字典将会使用顶点的名字作为键，邻接顶点列表作为值
+  }
+  // 向图中添加一个新的顶点
+  addVertex(v) {
+    if (!this.vertices.includes(v)) {
+      this.vertices.push(v)
+      this.adjList.set(v, [])
+    }
+  }
+  // 向我们要建立连接的两个顶点之间添加新的边
+  addEdge(v, w) {
+    if (!this.adjList.get(v)) {
+      this.addVertex(v)
+    }
+    if (!this.adjList.get(w)) {
+      this.addVertex(w)
+    }
+    this.adjList.get(v).push(w)
+    if (!this.isDirected) {
+      this.adjList.get(w).push(v)
+    }
+  }
+  //   返回顶点列表
+  getVertices() {
+    return this.vertices
+  }
+  // 返回邻接表
+  getAdjList() {
+    return this.adjList
+  }
+  toString() {
+    let s = ''
+    for (let i = 0; i < this.vertices.length; i++) {
+      s += `${this.vertices[i]} -> `
+      const neighbors = this.adjList.get(this.vertices[i])
+      for (let j = 0; j < neighbors.length; j++) {
+        s += `${neighbors[j]} `
+      }
+      s += '\n'
+    }
+    return s
+  }
+}
+const graph = new Graph()
+const myVertices = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
+for (let i = 0; i < myVertices.length; i++) {
+  graph.addVertex(myVertices[i])
+}
+graph.addEdge('A', 'B')
+graph.addEdge('A', 'C')
+graph.addEdge('A', 'D')
+graph.addEdge('C', 'D')
+graph.addEdge('C', 'G')
+graph.addEdge('D', 'G')
+graph.addEdge('D', 'H')
+graph.addEdge('B', 'E')
+graph.addEdge('B', 'F')
+graph.addEdge('E', 'I')
+// console.log(graph.toString())
+module.exports = { Graph }
+
+```
+
+###### 08.图的遍历
+
+```
+有两种算法可以对图进行遍历：
+	广度优先 搜索（breadth-first search，BFS）和深度优先搜索（depth-first search，DFS）。图遍历可以用来寻 找特定的顶点或寻找两个顶点之间的路径，检查图是否连通，检查图是否含有环，等等。
+
+	图遍历算法的思想是必须追踪每个第一次访问的节点，并且追踪有哪些节点还没有被完全探 索。对于两种图遍历算法，都需要明确指出第一个被访问的顶点。
+
+	完全探索一个顶点要求我们查看该顶点的每一条边。对于每一条边所连接的没有被访问过的 顶点，将其标注为被发现的，并将其加进待访问顶点列表中。
+
+	为了保证算法的效率，务必访问每个顶点至多两次。连通图中每条边和顶点都会被访问到.  广度优先搜索算法和深度优先搜索算法基本上是相同的，只有一点不同，那就是待访问顶点 列表的数据结构.
+```
+
+![](C:\Users\19734\Desktop\algorithm-JS\images\Snipaste_2022-05-29_14-09-15.png)
+
+```
+当要标注已经访问过的顶点时，我们用三种颜色来反映它们的状态。
+ 白色：表示该顶点还没有被访问。
+ 灰色：表示该顶点被访问过，但并未被探索过。
+ 黑色：表示该顶点被访问过且被完全探索过。
+```
+
+###### 09.广度优先搜索
+
+​	广度优先搜索算法会从指定的第一个顶点开始遍历图，先访问其所有的邻点（相邻顶点）， 就像一次访问图的一层。换句话说，就是先宽后深地访问顶点
+
+![](C:\Users\19734\Desktop\algorithm-JS\images\Snipaste_2022-05-29_14-30-49.png)
 
 ```
 
 ```
+
+
+
+###### 10.深度优先搜索
+
+​	深度优先搜索算法将会从第一个指定的顶点开始遍历图，沿着路径直到这条路径最后一个顶 点被访问了，接着原路回退并探索下一条路径。换句话说，它是先深度后广度地访问顶点
+
+
 
 ### 10.排序和搜索算法
 

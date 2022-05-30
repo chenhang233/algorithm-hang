@@ -92,7 +92,7 @@ dictionary.set('John', 'johnsnow@email.com')
 dictionary.set('Tyrion', 'tyrion@email.com')
 dictionary.remove('John')
 dictionary.forEach((k, v) => {
-  console.log('forEach: ', `key: ${k}, value: ${v}`)
+  // console.log('forEach: ', `key: ${k}, value: ${v}`)
 })
 
 module.exports = {

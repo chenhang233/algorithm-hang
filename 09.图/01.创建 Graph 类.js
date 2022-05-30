@@ -48,9 +48,8 @@ class Graph {
   }
 }
 const graph = new Graph()
-const myVertices = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'] // {12}
+const myVertices = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
 for (let i = 0; i < myVertices.length; i++) {
-  // {13}
   graph.addVertex(myVertices[i])
 }
 graph.addEdge('A', 'B')
@@ -63,4 +62,5 @@ graph.addEdge('D', 'H')
 graph.addEdge('B', 'E')
 graph.addEdge('B', 'F')
 graph.addEdge('E', 'I')
-console.log(graph.toString())
+// console.log(graph.toString())
+module.exports = { Graph }
