@@ -2450,7 +2450,64 @@ console.log(r)
 (3) 接着，算法对划分后的小数组（较主元小的值组成的子数组，以及较主元大的值组成的 子数组）重复之前的两个步骤，直至数组已完全排序。
 
 ```
-test
+const Compare = {
+  LESS_THAN: -1,
+  BIGGER_THAN: 1,
+}
+function defaultCompare(a, b) {
+  if (a === b) {
+    return 0
+  }
+  return a < b ? Compare.LESS_THAN : Compare.BIGGER_THAN
+}
+function quick(array, left, right, compareFn) {
+  let index
+  if (array.length > 1) {
+    index = partition(array, left, right, compareFn)
+    if (left < index - 1) {
+      quick(array, left, index - 1, compareFn)
+    }
+    if (index < right) {
+      quick(array, index, right, compareFn)
+    }
+  }
+  return array
+}
+function partition(array, left, right, compareFn) {
+  const pivot = array[Math.floor((right + left) / 2)]
+  let i = left
+  let j = right
+  while (i <= j) {
+    while (compareFn(array[i], pivot) === Compare.LESS_THAN) {
+      i++
+    }
+    while (compareFn(array[j], pivot) === Compare.BIGGER_THAN) {
+      j--
+    }
+    if (i <= j) {
+      swap(array, i, j)
+      i++
+      j--
+    }
+  }
+  return i
+}
+const swap = (array, a, b) => ([array[a], array[b]] = [array[b], array[a]])
+function quickSort(array, compareFn = defaultCompare) {
+  return quick(array, 0, array.length - 1, compareFn)
+}
+
+const result = quickSort([3, 5, 1, 6, 4, 7, 2])
+console.log(result)
+
+```
+
+6. 计数排序
+
+​	计数排序是我们在本书中学习的第一个分布式排序。分布式排序使用已组织好的辅助数据结构（称为桶），然后进行合并，得到排好序的数组。计数排序使用一个用来存储每个元素在原始 数组中出现次数的临时数组。在所有元素都计数完成后，临时数组已排好序并可迭代以构建排序 后的结果数组。 它是用来排序整数的优秀算法（它是一个整数排序算法），时间复杂度为 O(n+k)，其中 k 是 临时计数数组的大小；但是，它确实需要更多的内存来存放临时数组。
+
+```
+
 ```
 
 
