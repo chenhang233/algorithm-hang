@@ -25,3 +25,4 @@ function insertionSort(array, compareFn = defaultCompare) {
 
 const r = insertionSort([3, 5, 1, 4, 2])
 console.log(r)
+module.exports = { insertionSort }
