@@ -29,3 +29,6 @@ function findMaxValue(array) {
   }
   return max
 }
+
+const result = countingSort([1, 10, 4, 4, 2])
+console.log(result, 'result')
