@@ -2657,7 +2657,183 @@ function countingSortForRadix(array, radixBase, significantDigit, minValue) {
 
 ```
 
-test
+##### 3.搜索算法
+
+###### 1.顺序搜索
+
+​	顺序或线性搜索是最基本的搜索算法。它的机制是，将每一个数据结构中的元素和我们要找 的元素做比较。顺序搜索是最低效的一种搜索算法。
+
+```
+function defaultEquals(a, b) {
+  return a === b
+}
+function sequentialSearch(array, value, equalsFn = defaultEquals) {
+  for (let i = 0; i < array.length; i++) {
+    if (equalsFn(value, array[i])) {
+      return i
+    }
+  }
+  return -1
+}
+
+```
+
+###### 2.二分搜索
+
+​	二分搜索算法的原理和猜数字游戏类似，就是那个有人说“我正想着一个 1～100 的数”的 游戏。我们每回应一个数，那个人就会说这个数是高了、低了还是对了。 这个算法要求被搜索的数据结构已排序。
+
+​	搜索步骤:
+
+```
+(1) 选择数组的中间值。
+(2) 如果选中值是待搜索值，那么算法执行完毕（值找到了）。
+(3) 如果待搜索值比选中值要小，则返回步骤 1 并在选中值左边的子数组中寻找（较小）。
+(4) 如果待搜索值比选中值要大，则返回步骤 1 并在选种值右边的子数组中寻找（较大）。
+```
+
+​	实现:
+
+```
+const { quickSort } = require('../01.排序/05.快速排序')
+const Compare = {
+  LESS_THAN: -1,
+  BIGGER_THAN: 1,
+  EQUALS: 0,
+}
+function defaultCompare(a, b) {
+  if (a === b) {
+    return 0
+  }
+  return a < b ? Compare.LESS_THAN : Compare.BIGGER_THAN
+}
+function lesserOrEquals(a, b, compareFn) {
+  const comp = compareFn(a, b)
+  return comp === Compare.LESS_THAN || comp === Compare.EQUALS
+}
+function binarySearch(array, value, compareFn = defaultCompare) {
+  const sortedArray = quickSort(array)
+  let low = 0
+  let high = sortedArray.length - 1
+  while (lesserOrEquals(low, high, compareFn)) {
+    const mid = Math.floor((low + high) / 2)
+    const element = sortedArray[mid]
+    if (compareFn(element, value) === Compare.LESS_THAN) {
+      low = mid + 1
+    } else if (compareFn(element, value) === Compare.BIGGER_THAN) {
+      high = mid - 1
+    } else {
+      return mid
+    }
+  }
+  return -1
+}
+
+```
+
+###### 3.内插搜索
+
+​	内插搜索是改良版的二分搜索。二分搜索总是检查 mid 位置上的值，而内插搜索可能会根 据要搜索的值检查数组中的不同地方。
+
+​	步骤:
+
+```
+(1) 使用 position 公式选中一个值；
+(2) 如果这个值是待搜索值，那么算法执行完毕（值找到了）；
+(3) 如果待搜索值比选中值要小，则返回步骤 1 并在选中值左边的子数组中寻找（较小）；
+(4) 如果待搜索值比选中值要大，则返回步骤 1 并在选种值右边的子数组中寻找（较大）。
+```
+
+​	实现:
+
+```
+function defaultEquals(a, b) {
+  return a === b
+}
+const Compare = {
+  LESS_THAN: -1,
+  BIGGER_THAN: 1,
+  EQUALS: 0,
+}
+function defaultCompare(a, b) {
+  if (a === b) {
+    return 0
+  }
+  return a < b ? Compare.LESS_THAN : Compare.BIGGER_THAN
+}
+function lesserOrEquals(a, b, compareFn) {
+  const comp = compareFn(a, b)
+  return comp === Compare.LESS_THAN || comp === Compare.EQUALS
+}
+function biggerOrEquals(a, b, compareFn) {
+  const comp = compareFn(a, b)
+  return comp === Compare.BIGGER_THAN || comp === Compare.EQUALS
+}
+export function defaultDiff(a, b) {
+  return Number(a) - Number(b)
+}
+function interpolationSearch(
+  array,
+  value,
+  compareFn = defaultCompare,
+  equalsFn = defaultEquals,
+  diffFn = defaultDiff
+) {
+  const { length } = array
+  let low = 0
+  let high = length - 1
+  let position = -1
+  let delta = -1
+  while (
+    low <= high &&
+    biggerOrEquals(value, array[low], compareFn) &&
+    lesserOrEquals(value, array[high], compareFn)
+  ) {
+    delta = diffFn(value, array[low]) / diffFn(array[high], array[low])
+    position = low + Math.floor((high - low) * delta)
+    if (equalsFn(array[position], value)) {
+      return position
+    }
+    if (compareFn(array[position], value) === Compare.LESS_THAN) {
+      low = position + 1
+    } else {
+      high = position - 1
+    }
+  }
+  return -1
+}
+
+```
+
+###### 4.随机算法
+
+​	不过还有 一种场景是需要将一个数组中的值进行随机排列。现实中的一个常见场景是洗扑克牌。
+
+​	Fisher-Yates 随机
+
+```
+	它的含义是迭代数组，从最后一位开始并将当前位置和一个随机位置进行交换。这个随机位置比当前位置小。这样，这个算法可以保证随机过的位置不会再被随机一次（洗扑克牌的次数越多，随机效果越差）。
+```
+
+代码:
+
+```
+const swap = (array, a, b) => ([array[a], array[b]] = [array[b], array[a]])
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const randomIndex = Math.floor(Math.random() * (i + 1))
+    swap(array, i, randomIndex)
+  }
+  return array
+}
+
+```
+
+
+
+
+
+
 
 
 

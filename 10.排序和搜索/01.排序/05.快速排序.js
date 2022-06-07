@@ -47,3 +47,6 @@ function quickSort(array, compareFn = defaultCompare) {
 
 const result = quickSort([3, 5, 1, 6, 4, 7, 2])
 console.log(result)
+module.exports = {
+  quickSort,
+}
