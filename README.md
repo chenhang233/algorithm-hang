@@ -2831,19 +2831,74 @@ function shuffle(array) {
 
 
 
-
-
-
-
-
-
-
-
-```
-
-```
-
 ### 11.算法设计与技巧
+
+##### 1.分而治之
+
+​	分而 治之是算法设计中的一种方法。它将一个问题分成多个和原问题相似的小问题，递归解决小问题， 再将解决方式合并以解决原来的问题。
+
+```
+分而治之的方式实现二分搜索:
+	const { quickSort } = require('../../10.排序和搜索/01.排序/05.快速排序')
+const Compare = {
+  LESS_THAN: -1,
+  BIGGER_THAN: 1,
+  EQUALS: 0,
+}
+function defaultCompare(a, b) {
+  if (a === b) {
+    return 0
+  }
+  return a < b ? Compare.LESS_THAN : Compare.BIGGER_THAN
+}
+function binarySearchRecursive(
+  array,
+  value,
+  low,
+  high,
+  compareFn = defaultCompare
+) {
+  if (low <= high) {
+    const mid = Math.floor((low + high) / 2)
+    const element = array[mid]
+    if (compareFn(element, value) === Compare.LESS_THAN) {
+      return binarySearchRecursive(array, value, mid + 1, high, compareFn)
+    } else if (compareFn(element, value) === Compare.BIGGER_THAN) {
+      return binarySearchRecursive(array, value, low, mid - 1, compareFn)
+    } else {
+      return mid
+    }
+  }
+  return -1
+}
+export function binarySearch(array, value, compareFn = defaultCompare) {
+  const sortedArray = quickSort(array)
+  const low = 0
+  const high = sortedArray.length - 1
+  return binarySearchRecursive(array, value, low, high, compareFn)
+}
+
+```
+
+##### 2.动态规划
+
+​	动态规划（dynamic programming，DP）是一种将复杂问题分解成更小的子问题来解决的优 化技术。
+
+```
+	注意，动态规划和分而治之是不同的方法。分而治之方法是把问题分解成相互独立的子问题，然后组合它们的答案，而动态规划则是将问题分解成相互依赖的子问题。
+```
+
+
+
+
+
+
+
+
+
+
+
+
 
 ```
 
