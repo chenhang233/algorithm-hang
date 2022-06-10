@@ -2888,11 +2888,99 @@ export function binarySearch(array, value, compareFn = defaultCompare) {
 	注意，动态规划和分而治之是不同的方法。分而治之方法是把问题分解成相互独立的子问题，然后组合它们的答案，而动态规划则是将问题分解成相互依赖的子问题。
 ```
 
+###### 1.最小硬币找零问题
 
+​	最少硬币找零问题是硬币找零问题的一个变种。硬币找零问题是给出要找零的钱数，以及可 用的硬币面额 d1, …, dn及其数量，找出有多少种找零方法。最少硬币找零问题是给出要找零的钱 数，以及可用的硬币面额 d1, …, dn及其数量，找到所需的最少的硬币个数。
 
+```
+function minCoinChange(coins, amount) {
+  // 传入面额, 总钱数
+  const cache = [] // 记忆化 存储不同钱数在当前面值数组
+  const makeChange = (value) => {
+    value // 当前钱数
+    if (!value) {
+      return []
+    }
+    if (cache[value]) {
+      return cache[value]
+    }
+    let min = []
+    let newMin
+    let newAmount // 剩下的钱
+    for (let i = 0; i < coins.length; i++) {
+      const coin = coins[i]
+      newAmount = value - coin
+      if (newAmount >= 0) {
+        newMin = makeChange(newAmount)
+      }
+      if (
+        newAmount >= 0 &&
+        (newMin.length < min.length - 1 || !min.length) &&
+        (newMin.length || !newAmount)
+      ) {
+        min = [coin].concat(newMin)
+        console.log('new Min ' + min + ' for ' + amount, value)
+      }
+    }
+    return (cache[value] = min)
+  }
+  return makeChange(amount)
+}
 
+console.log(minCoinChange([1, 5, 10, 25], 36))
 
+```
 
+###### 2.背包问题
+
+​	背包问题是一个组合优化问题。它可以描述如下：给定一个固定大小、能够携重量 W 的背 包，以及一组有价值和重量的物品，找出一个最佳解决方案，使得装入背包的物品总重量不超过 W，且总价值最大。
+
+```
+function knapSack(capacity, weights, values, n) {
+  // values 价值 weights 重量 n   values.length;
+  const kS = []
+  for (let i = 0; i <= n; i++) {
+    kS[i] = []
+  }
+  for (let i = 0; i <= n; i++) {
+    for (let w = 0; w <= capacity; w++) {
+      if (i === 0 || w === 0) {
+        kS[i][w] = 0
+      } else if (weights[i - 1] <= w) {
+        const a = values[i - 1] + kS[i - 1][w - weights[i - 1]]
+        const b = kS[i - 1][w]
+        kS[i][w] = a > b ? a : b
+      } else {
+        kS[i][w] = kS[i - 1][w]
+      }
+    }
+  }
+  findValues(n, capacity, kS, weights, values)
+  return kS[n][capacity]
+}
+
+function findValues(n, capacity, kS, weights, values) {
+  let i = n
+  let k = capacity
+  while (i > 0 && k > 0) {
+    if (kS[i][k] !== kS[i - 1][k]) {
+      console.log(
+        `物品 ${i} 可以是解的一部分 w,v: ${weights[i - 1]}, ${values[i - 1]}`
+      )
+      i--
+      k -= kS[i][k]
+    } else {
+      i--
+    }
+  }
+}
+const values = [3, 4, 5],
+  weights = [2, 3, 4],
+  capacity = 5,
+  n = values.length
+console.log(knapSack(capacity, weights, values, n))
+
+```
 
 
 
