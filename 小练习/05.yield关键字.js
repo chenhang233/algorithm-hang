@@ -35,6 +35,7 @@ class RandomGraph {
       console.log(`${node.id}: ${ids}`)
     }
   }
+  //   来测试某个图是否连通
   isConnected() {
     const visitedNodes = new Set()
     function* traverse(nodes) {
