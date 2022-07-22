@@ -2,7 +2,7 @@ function minCoinChange(coins, amount) {
   // 传入面额, 总钱数
   const cache = [] // 记忆化 存储不同钱数在当前面值数组
   const makeChange = (value) => {
-    value // 当前钱数
+    //value 当前钱数
     if (!value) {
       return []
     }
@@ -32,4 +32,4 @@ function minCoinChange(coins, amount) {
   return makeChange(amount)
 }
 
-console.log(minCoinChange([1, 5, 10, 25], 36))
+console.log(minCoinChange([1, 2], 2))
