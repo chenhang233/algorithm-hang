@@ -1,37 +1,27 @@
 const isMatch = (s, p) => {
   if (s == null || p == null) return false
-
-  const sLen = s.length,
-    pLen = p.length
-
-  const dp = new Array(sLen + 1)
-  console.log(dp)
-  for (let i = 0; i < dp.length; i++) {
-    dp[i] = new Array(pLen + 1).fill(false) // 将项默认为false
+  const sLength = s.length,
+    pLength = p.length
+  let matrix = Array.from({ length: sLength + 1 }, (_) => Array.from({ length: pLength + 1 }, (_) => false))
+  matrix[0][0] = true
+  for (let i = 1; i < pLength + 1; ++i) {
+    if (p[i - 1] === '*') matrix[0][i] = matrix[0][i - 2]
   }
-  console.log(dp)
-  // base case
-  dp[0][0] = true
-  for (let j = 1; j < pLen + 1; j++) {
-    if (p[j - 1] == '*') dp[0][j] = dp[0][j - 2]
-  }
-  console.log(dp)
-
-  // 迭代
-  for (let i = 1; i < sLen + 1; i++) {
-    for (let j = 1; j < pLen + 1; j++) {
+  console.log(matrix)
+  for (let i = 1; i < sLength + 1; i++) {
+    for (let j = 1; j < pLength + 1; j++) {
       if (s[i - 1] == p[j - 1] || p[j - 1] == '.') {
-        dp[i][j] = dp[i - 1][j - 1]
+        matrix[i][j] = matrix[i - 1][j - 1]
       } else if (p[j - 1] == '*') {
         if (s[i - 1] == p[j - 2] || p[j - 2] == '.') {
-          dp[i][j] = dp[i][j - 2] || dp[i - 1][j - 2] || dp[i - 1][j]
+          matrix[i][j] = matrix[i][j - 2] || matrix[i - 1][j - 2] || matrix[i - 1][j]
         } else {
-          dp[i][j] = dp[i][j - 2]
+          matrix[i][j] = matrix[i][j - 2]
         }
       }
     }
   }
-  return dp[sLen][pLen] // 长sLen的s串 是否匹配 长pLen的p串
+  return matrix[sLength][pLength]
 }
 
-console.log(isMatch('advcccaa', 'a.vc*'))
+console.log(isMatch('aa', 'a*b*'))
