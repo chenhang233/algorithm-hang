@@ -16,3 +16,23 @@ var jump = function (nums) {
   }
   return step
 }
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var jump2 = function (nums) {
+  let step = 0,
+    start = 0,
+    end = 1
+  while (end < nums.length) {
+    let tempMax = 0
+    for (let i = start; i < end; i++) {
+      tempMax = Math.max(tempMax, i + nums[i])
+    }
+    start = end
+    end = tempMax + 1
+    step++
+  }
+  return step
+}
