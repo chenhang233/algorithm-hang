@@ -7,7 +7,7 @@ var permute = function (nums) {
   const result = []
   const fn = (index) => {
     if (index === numsLen) {
-      result.push([...nums])
+      return result.push([...nums])
     }
     for (let i = index; i < numsLen; i++) {
       ;[nums[i], nums[index]] = [nums[index], nums[i]]
