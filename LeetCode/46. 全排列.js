@@ -20,3 +20,27 @@ var permute = function (nums) {
 }
 
 console.log(permute([1, 2, 3]))
+
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var permute2 = function (nums) {
+  const res = [],
+    path = []
+  const backtrack = (n, k, used) => {
+    if (path.length === k) {
+      return res.push([...path])
+    }
+    for (let i = 0; i < k; ++i) {
+      if (used[i]) continue
+      used[i] = true
+      path.push(n[i])
+      backtrack(n, k, used)
+      used[i] = false
+      path.pop()
+    }
+  }
+  backtrack(nums, nums.length, [])
+  return res
+}
