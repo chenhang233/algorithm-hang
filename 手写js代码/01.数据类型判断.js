@@ -6,3 +6,9 @@ function typeOf(obj) {
 typeOf([]) // 'array'
 typeOf({}) // 'object'
 typeOf(new Date())
+
+function Fn() {}
+
+Fn.prototype.a = (e) => {
+  console.log(e)
+}
