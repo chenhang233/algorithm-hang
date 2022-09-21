@@ -1,15 +1,15 @@
 /**
  * @param {number[][]} intervals
+ * @param {number[]} newInterval
  * @return {number[][]}
  */
-var merge = function (intervals) {
-  const n = intervals.length
-  const res = []
+var insert = function (intervals, newInterval) {
+  intervals.push(newInterval)
   intervals.sort((a, b) => a[0] - b[0])
-  console.log(intervals, 'intervals')
+  const res = []
   let begin = intervals[0][0]
   let end = intervals[0][1]
-  for (let i = 1; i < n; ++i) {
+  for (let i = 1; i < intervals.length; ++i) {
     if (intervals[i][0] > end) {
       res.push([begin, end])
       begin = intervals[i][0]
@@ -21,11 +21,3 @@ var merge = function (intervals) {
   res.push([begin, end])
   return res
 }
-
-console.log(
-  merge([
-    [1, 3],
-    [2, 5],
-    [6, 9],
-  ])
-)
