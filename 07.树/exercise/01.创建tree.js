@@ -166,4 +166,6 @@ tree.removeNode(11)
 tree.postOrderTraverse((v) => console.log(v))
 module.exports = {
   BinarySearchTree,
+  Compare,
+  defaultCompare,
 }
