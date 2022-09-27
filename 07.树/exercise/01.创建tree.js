@@ -168,4 +168,5 @@ module.exports = {
   BinarySearchTree,
   Compare,
   defaultCompare,
+  Node,
 }
