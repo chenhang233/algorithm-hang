@@ -7,7 +7,7 @@ const insertionSort = (arr = []) => {
   for (let i = 1; i < length; i++) {
     let j = i
     temp = arr[i]
-    while (j > 0 && arr[j - 1] > arr[i]) {
+    while (j > 0 && arr[j - 1] > temp) {
       arr[j] = arr[j - 1]
       j--
     }
@@ -16,4 +16,7 @@ const insertionSort = (arr = []) => {
   return arr
 }
 
-exampleMatrixFn(insertionSort)
+// exampleMatrixFn(insertionSort)
+module.exports = {
+  insertionSort,
+}
