@@ -38,3 +38,5 @@ function sortBuckets(buckets) {
   }
   return sortedArray
 }
+
+// console.log(bucketSort([55, 44, 33]))
