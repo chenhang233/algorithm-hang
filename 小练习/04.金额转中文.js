@@ -10,15 +10,11 @@ function NumToStr(money) {
   let chinesStr = ''
   let parts
   let Symbol = ''
-  let maxNum = 999999999999999.9999
   if (money === 0) {
     chinesStr = cnNmus[0] + cnIntLast + cnInteger
     return chinesStr
   }
   money = parseFloat(money)
-  if (money >= maxNum) {
-    return '超出最大处理数字'
-  }
   if (money < 0) {
     money = -money
     Symbol = '负 '
@@ -74,4 +70,4 @@ function NumToStr(money) {
 }
 
 console.log(NumToStr(0))
-console.log(NumToStr(1000010))
+console.log(NumToStr(100000100))
