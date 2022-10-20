@@ -4,91 +4,43 @@
  * @return {boolean}
  */
 var exist = function (board, word) {
-  const start_s = word[0]
-  let row_max = board.length,
-    col_max = board[0].length,
-    word_max = word.length
-  const track = (row, col, s_i, s, path) => {
-    console.log(row, col, s_i, s, path)
-    if (s_i === word_max - 1) return true
-
-    if (
-      row - 1 >= 0 &&
-      !path[row - 1][col] &&
-      board[row - 1][col] === word[s_i + 1]
-    ) {
-      let prev = s
-      s += word[++s_i]
-      path[row - 1][col] = true
-      if (track(row - 1, col, s_i, s, path)) return true
-      //   path[row - 1][col] = false
-      s_i--
-      s = prev
-    }
-    if (
-      row + 1 < row_max &&
-      !path[row + 1][col] &&
-      board[row + 1][col] === word[s_i + 1]
-    ) {
-      let prev = s
-
-      s += word[++s_i]
-      path[row + 1][col] = true
-      if (track(row + 1, col, s_i, s, path)) return true
-      //   path[row + 1][col] = false
-      s_i--
-      s = prev
-    }
-    if (
-      col - 1 >= 0 &&
-      !path[row][col - 1] &&
-      board[row][col - 1] === word[s_i + 1]
-    ) {
-      let prev = s
-
-      s += word[++s_i]
-      path[row][col - 1] = true
-      if (track(row, col - 1, s_i, s, path)) return true
-      //   path[row][col - 1] = false
-      s_i--
-      s = prev
-    }
-    if (
-      col + 1 < col_max &&
-      !path[row][col + 1] &&
-      board[row][col + 1] === word[s_i + 1]
-    ) {
-      let prev = s
-      s += word[++s_i]
-      path[row][col + 1] = true
-      if (track(row, col + 1, s_i, s, path)) return true
-      //   path[row][col + 1] = false
-      s_i--
-      s = prev
-    }
-    return false
-  }
-  for (let i = 0; i < row_max; i++) {
-    for (let j = 0; j < col_max; j++) {
-      if (board[i][j] === start_s) {
-        const path = Array.from({ length: row_max }, () =>
-          Array.from({ length: col_max }, () => false)
-        )
-        path[i][j] = true
-        if (track(i, j, 0, start_s, path)) return true
+  const row = board.length,
+    col = board[0].length
+  const visitBoard = Array.from({ length: row }, () =>
+    Array.from({ length: col }, () => false)
+  )
+  const backtrack = (i, j, word_i) => {
+    if (board[i][j] !== word[word_i]) return false
+    if (word_i === word.length - 1) return true
+    const direction = [
+      [-1, 0],
+      [0, 1],
+      [1, 0],
+      [0, -1],
+    ]
+    let result = false
+    visitBoard[i][j] = true
+    for (let [x, y] of direction) {
+      const nexti = i + x,
+        nextj = j + y
+      if (0 <= nexti && nexti < row && 0 <= nextj && nextj < col) {
+        if (!visitBoard[nexti][nextj]) {
+          const flag = backtrack(nexti, nextj, word_i + 1)
+          if (flag) {
+            result = true
+            break
+          }
+        }
       }
+    }
+    visitBoard[i][j] = false
+    return result
+  }
+  for (let i = 0; i < row; i++) {
+    for (let j = 0; j < col; j++) {
+      let flag = backtrack(i, j, 0)
+      if (flag) return true
     }
   }
   return false
 }
-
-console.log(
-  exist(
-    [
-      ['A', 'B', 'C', 'E'],
-      ['S', 'F', 'E', 'S'],
-      ['A', 'D', 'E', 'E'],
-    ],
-    'ABCESEEEFS'
-  )
-)
