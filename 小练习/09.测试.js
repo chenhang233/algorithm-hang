@@ -10,3 +10,4 @@ b.key1 = 'zxc'
 b.form.key2 = '132'
 
 console.log(a, b)
+console.log('test')
