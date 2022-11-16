@@ -11,7 +11,7 @@ const baseConverter = (number, n = 2) => {
   return res.reverse().join('')
 }
 
-console.log(baseConverter(100345, 2))
+console.log(baseConverter(256, 2))
 console.log(baseConverter(100345, 8)) // 303771
 console.log(baseConverter(100345, 16)) // 187F9
 console.log(baseConverter(100345, 35)) // 2BW0
