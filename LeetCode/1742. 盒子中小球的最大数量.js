@@ -30,3 +30,25 @@ var countBalls = function (lowLimit, highLimit) {
   }
   return max
 }
+
+/**
+ * @param {number} lowLimit
+ * @param {number} highLimit
+ * @return {number}
+ */
+var countBalls2 = function (lowLimit, highLimit) {
+  const map = new Map()
+  let res = 0
+  for (let i = lowLimit; i <= highLimit; i++) {
+    let box = 0,
+      j = i
+    while (j !== 0) {
+      box += j % 10
+      j = Math.floor(j / 10)
+    }
+    map.set(box, (map.get(box) || 0) + 1)
+    const r = map.get(box)
+    res < r && (res = r)
+  }
+  return res
+}
