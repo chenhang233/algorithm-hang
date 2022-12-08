@@ -3070,7 +3070,5 @@ function sequentialSearch(array, value, equalsFn = defaultEquals) {
 ### 13.最后
 
 ```
-  我的qq: 1973433180
-  相信自己的天赋
-  相信自己的努力
+  我的微信: chenhang622
 ```
