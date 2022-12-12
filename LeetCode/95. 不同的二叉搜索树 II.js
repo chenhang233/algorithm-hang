@@ -10,43 +10,25 @@
  * @param {number} n
  * @return {TreeNode[]}
  */
-function TreeNode(val, left, right) {
-  this.val = val === undefined ? 0 : val
-  this.left = left === undefined ? null : left
-  this.right = right === undefined ? null : right
-}
 var generateTrees = function (n) {
-  const res = []
-  const generate = (node, i, usedMap, len) => {
-    console.log(node, 'node', usedMap, 'usedMap', i, 'i')
-    if (len === n) {
-      //   res.push(node)
-      return
+  const generate = (start, end) => {
+    if (start > end) {
+      return [null]
     }
-    if (i - 1) {
-      for (let j = 1; j <= i - 1; i++) {
-        if (usedMap[j]) break
-        node.left = new TreeNode(j)
-        usedMap[j] = true
-        len++
-        generate(node.left, j, usedMap, len)
+    const list = []
+    for (let i = start; i <= end; i++) {
+      const leftNodes = generate(start, i - 1)
+      const rightNodes = generate(i + 1, end)
+      for (let L of leftNodes) {
+        for (let R of rightNodes) {
+          const root = new TreeNode(i)
+          root.left = L
+          root.right = R
+          list.push(root)
+        }
       }
     }
-    if (i < n) {
-      for (let j = i + 1; j <= n; j++) {
-        if (usedMap[j]) break
-        node.right = new TreeNode(j)
-        usedMap[j] = true
-        len++
-        generate(node.right, j, usedMap, len)
-      }
-    }
+    return list
   }
-  //   for (let i = 1; i <= n; i++) {
-  const node = new TreeNode(1)
-  generate(node, 1, { 1: true }, 1)
-  //   }
-  console.log(node)
+  return generate(1, n)
 }
-
-generateTrees(3)
