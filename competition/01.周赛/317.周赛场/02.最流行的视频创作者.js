@@ -64,12 +64,8 @@ var mostPopularCreator = function (creators, ids, views) {
       map.set(creators[i], { total: views[i], mostId: ids[i], most: views[i] })
     }
   }
-  // 根据total递减排序
   const arr = Array.from(map.entries()).sort((a, b) => b[1].total - a[1].total)
-  console.log(arr)
-  // 最大total，即最高流行度
   const total = arr[0][1].total
-  // 寻找最高流行度相同的项
   return arr
     .filter((item) => item[1].total === total)
     .map((item) => [item[0], item[1].mostId])
