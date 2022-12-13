@@ -41,14 +41,3 @@ var maximumSubarraySum = function (nums, k) {
   }
   return res
 }
-
-console.log(
-  maximumSubarraySum([4, 3, 3, 3, 2], 3), // 0
-  maximumSubarraySum([2, 5, 4, 5], 4), // 0
-  maximumSubarraySum([5, 3, 3, 1, 1], 3), // 0
-  maximumSubarraySum([1, 5, 4, 2, 9, 9, 9], 3), // 15
-  maximumSubarraySum([4, 4, 4], 3), // 0
-  maximumSubarraySum([9, 18, 10, 13, 17, 9, 19, 2, 1, 18], 5), // 68
-  maximumSubarraySum([3, 2, 3, 1], 3), // 6
-  maximumSubarraySum([1, 1, 1, 7, 8, 9], 3) // 24
-)
