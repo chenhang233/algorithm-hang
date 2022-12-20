@@ -30,11 +30,6 @@ Allocator.prototype.allocate = function (size, mID) {
       }
     }
   }
-  console.log('================')
-  console.log(this.arr)
-  console.log(this.usedMap)
-  console.log(reto)
-  console.log('================')
   return reto
 }
 
@@ -61,14 +56,3 @@ Allocator.prototype.free = function (mID) {
  * var param_1 = obj.allocate(size,mID)
  * var param_2 = obj.free(mID)
  */
-const loc = new Allocator(10)
-loc.allocate(1, 1)
-loc.allocate(1, 2)
-loc.allocate(1, 3)
-loc.free(2)
-loc.allocate(3, 4)
-loc.allocate(1, 1)
-loc.allocate(1, 1)
-loc.free(1)
-loc.allocate(10, 2)
-loc.free(7)
