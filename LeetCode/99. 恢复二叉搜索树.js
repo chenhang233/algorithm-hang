@@ -49,3 +49,40 @@ var recoverTree = function (root) {
   const [f1, f2] = findTwoNum(nums)
   swap(root, f1, f2, 2)
 }
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {void} Do not return anything, modify root in-place instead.
+ */
+var recoverTree2 = function (root) {
+  const stack = []
+  let previou = null,
+    f1 = null,
+    f2 = null
+  while (stack.length || root) {
+    while (root) {
+      stack.push(root)
+      root = root.left
+    }
+    root = stack.pop()
+    if (previou && previou.val > root.val) {
+      f1 = root
+      if (!f2) {
+        f2 = previou
+      } else {
+        break
+      }
+    }
+    previou = root
+    root = root.right
+  }
+  ;[f1.val, f2.val] = [f2.val, f1.val]
+}
