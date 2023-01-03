@@ -36,6 +36,7 @@ function NumToStr(money) {
       let p = IntLen - 1 - i // 前一位index
       let q = p / 4
       let m = p % 4
+      console.log(n, p, q, m)
       if (n == 0) {
         zeroCount++
       } else {
@@ -45,9 +46,11 @@ function NumToStr(money) {
         zeroCount = 0
         chinesStr += cnNmus[parseInt(n)] + cnIntRadix[m]
       }
+      console.log(m, zeroCount, 'zeroCount-----------')
       if (m == 0 && zeroCount < 4) {
         chinesStr += cnIntUnits[q]
       }
+      console.log(chinesStr, 'chinesStr')
     }
     chinesStr += cnIntLast
   }
@@ -69,5 +72,6 @@ function NumToStr(money) {
   return chinesStr
 }
 
-console.log(NumToStr(0))
-console.log(NumToStr(100000100))
+// console.log(NumToStr(0))
+// console.log(NumToStr(100000100))
+console.log(NumToStr(10010))
