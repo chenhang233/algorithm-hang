@@ -1,17 +1,6 @@
-const Compare = {
-  LESS_THAN: -1,
-  BIGGER_THAN: 1,
-}
-function defaultCompare(a, b) {
-  if (a === b) {
-    return 0
-  }
-  return a < b ? Compare.LESS_THAN : Compare.BIGGER_THAN
-}
 const swap = (array, a, b) => ([array[a], array[b]] = [array[b], array[a]])
-class MinHeap {
-  constructor(compareFn = defaultCompare) {
-    this.compareFn = compareFn
+class MaxHeap {
+  constructor() {
     this.heap = []
   }
   getLeftIndex(index) {
@@ -26,7 +15,6 @@ class MinHeap {
     }
     return Math.floor((index - 1) / 2)
   }
-  // 向堆中插入新值
   insert(value) {
     if (value != null) {
       this.heap.push(value)
@@ -35,13 +23,9 @@ class MinHeap {
     }
     return false
   }
-  //   上移操作
   siftUp(index) {
     let parent = this.getParentIndex(index)
-    while (
-      index > 0 &&
-      this.compareFn(this.heap[parent], this.heap[index]) > Compare.LESS_THAN
-    ) {
+    while (index > 0 && this.heap[parent] < this.heap[index]) {
       swap(this.heap, parent, index)
       index = parent
       parent = this.getParentIndex(index)
@@ -53,11 +37,9 @@ class MinHeap {
   isEmpty() {
     return this.size() === 0
   }
-  // 从堆中找到最小值或最大值
-  findMinimum() {
+  findMaxmum() {
     return this.isEmpty() ? undefined : this.heap[0]
   }
-  //  导出堆中的最小值或最大值 删除
   extract() {
     if (this.isEmpty()) {
       return undefined
@@ -70,22 +52,15 @@ class MinHeap {
     this.siftDown(0)
     return removedValue
   }
-  // 下移操作（堆化）
   siftDown(index) {
     let element = index
     const left = this.getLeftIndex(index)
     const right = this.getRightIndex(index)
     const size = this.size()
-    if (
-      left < size &&
-      this.compareFn(this.heap[element], this.heap[left]) > -1
-    ) {
+    if (left < size && this.heap[element] < this.heap[left]) {
       element = left
     }
-    if (
-      right < size &&
-      this.compareFn(this.heap[element], this.heap[right]) > -1
-    ) {
+    if (right < size && this.heap[element] < this.heap[right]) {
       element = right
     }
     if (index !== element) {
@@ -95,10 +70,12 @@ class MinHeap {
   }
 }
 
-heap = new MinHeap()
+heap = new MaxHeap()
 for (let i = 1; i < 10; i++) {
   heap.insert(i)
 }
 console.log('Extract minimum: ', heap.extract()) // 1
-// console.log('Extract minimum: ', heap.extract())
+console.log('Extract minimum: ', heap.extract())
+console.log('Extract minimum: ', heap.extract())
+console.log('Extract minimum: ', heap.extract())
 console.log(heap.heap)
