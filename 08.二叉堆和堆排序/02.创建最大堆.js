@@ -50,6 +50,7 @@ class MaxHeap {
     const removedValue = this.heap.shift()
     this.heap.unshift(this.heap.pop())
     this.siftDown(0)
+    console.log(removedValue, 'removedValue')
     return removedValue
   }
   siftDown(index) {

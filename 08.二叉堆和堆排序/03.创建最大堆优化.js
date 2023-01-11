@@ -1,34 +1,3 @@
-/**
- * @param {number[]} nums
- * @param {number} k
- * @return {number}
- * 超时
- */
-var maxKelements = function (nums, k) {
-  const map = {}
-  let result = 0
-  for (let i = 0; i < nums.length; i++) {
-    const number = nums[i]
-    map[number] ? map[number]++ : (map[number] = 1)
-  }
-  for (let i = 0; i < k; i++) {
-    let max = 0
-    for (const key in map) {
-      if (parseInt(key) > parseInt(max)) max = key
-    }
-    result += parseInt(max)
-    if (--map[max] == 0) delete map[max]
-    const newkey = Math.ceil(max / 3)
-    map[newkey] ? map[newkey]++ : (map[newkey] = 1)
-  }
-  return result
-}
-
-console.log(
-  maxKelements([1, 10, 3, 3, 3], 3),
-  maxKelements([10, 10, 10, 10, 10], 5)
-)
-
 class MaxHeap {
   constructor() {
     this.heap = []
@@ -41,9 +10,6 @@ class MaxHeap {
     return 2 * index + 2
   }
   getParentIndex(index) {
-    if (index === 0) {
-      return undefined
-    }
     return Math.floor((index - 1) / 2)
   }
   insert(value) {
@@ -73,7 +39,9 @@ class MaxHeap {
     if (this.isEmpty()) {
       return undefined
     }
+    console.log(this.heap, 'prev')
     this.swap(this.heap, 0, this.size() - 1)
+    console.log(this.heap, 'next')
     const remove = this.heap.pop()
     this.sink(0)
     return remove
@@ -92,6 +60,23 @@ class MaxHeap {
       i = next
     }
   }
+  //   sink(i) {
+  //     const val = this.heap[i]
+  //     const leftVal = (i) => this.heap[this.getLeftIndex(i)] || 0
+  //     const rightVal = (i) => this.heap[this.getRightIndex(i)] || 0
+  //     while (
+  //       (leftVal(i) || rightVal(i)) &&
+  //       Math.max(leftVal(i), rightVal(i)) > val
+  //     ) {
+  //       const next =
+  //         (this.heap[this.getLeftIndex(i)] ?? 0) >
+  //         (this.heap[this.getRightIndex(i)] ?? 0)
+  //           ? this.getLeftIndex(i)
+  //           : this.getRightIndex(i)
+  //       this.swap(this.heap, i, next)
+  //       i = next
+  //     }
+  //   }
   siftDown(index) {
     let element = index
     const left = this.getLeftIndex(index)
@@ -109,11 +94,7 @@ class MaxHeap {
     }
   }
 }
-/**
- * @param {number[]} nums
- * @param {number} k
- * @return {number}
- */
+
 var maxKelements = function (nums, k) {
   let result = 0
   const heap = new MaxHeap()
@@ -123,5 +104,8 @@ var maxKelements = function (nums, k) {
     result += cur
     heap.insert(Math.ceil(cur / 3))
   }
+  console.log(result)
   return result
 }
+
+maxKelements([10, 10, 10, 10, 10], 5)
