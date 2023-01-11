@@ -38,10 +38,7 @@ class MinHeap {
   //   上移操作
   siftUp(index) {
     let parent = this.getParentIndex(index)
-    while (
-      index > 0 &&
-      this.compareFn(this.heap[parent], this.heap[index]) > Compare.LESS_THAN
-    ) {
+    while (index > 0 && this.heap[parent] > this.heap[index]) {
       swap(this.heap, parent, index)
       index = parent
       parent = this.getParentIndex(index)
@@ -95,10 +92,12 @@ class MinHeap {
   }
 }
 
-heap = new MinHeap()
+const heap = new MinHeap()
 for (let i = 1; i < 10; i++) {
   heap.insert(i)
 }
+console.log('Extract minimum: ', heap.extract()) // 1
+console.log('Extract minimum: ', heap.extract()) // 1
 console.log('Extract minimum: ', heap.extract()) // 1
 // console.log('Extract minimum: ', heap.extract())
 console.log(heap.heap)

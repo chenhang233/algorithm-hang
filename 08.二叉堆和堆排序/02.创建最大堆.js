@@ -70,7 +70,7 @@ class MaxHeap {
   }
 }
 
-heap = new MaxHeap()
+const heap = new MaxHeap()
 for (let i = 1; i < 10; i++) {
   heap.insert(i)
 }
