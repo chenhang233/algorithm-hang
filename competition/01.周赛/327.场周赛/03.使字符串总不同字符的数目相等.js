@@ -3,7 +3,7 @@
  * @param {string} word2
  * @return {boolean}
  */
-var isItPossible = function (word1, word2) {
+var isItPossible_ = function (word1, word2) {
   const map1 = {}
   const map1Max = new Set()
   let m1 = 0
@@ -55,10 +55,37 @@ var isItPossible = function (word1, word2) {
   }
 }
 
+/**
+ * @param {string} word1
+ * @param {string} word2
+ * @return {boolean}
+ */
+var isItPossible = function (word1, word2) {
+  let map1 = new Map(),
+    map2 = new Map()
+
+  for (let w of word1) map1.set(w, (map1.get(w) ?? 0) + 1)
+  for (let w of word2) map2.set(w, (map2.get(w) ?? 0) + 1)
+
+  for (let [k1, v1] of map1) {
+    for (let [k2, v2] of map2) {
+      if (k1 === k2) {
+        if (map1.size === map2.size) return true
+      } else if (
+        map1.size - (v1 === 1) + !map1.has(k2) ===
+        map2.size - (v2 === 1) + !map2.has(k1)
+      )
+        return true
+    }
+  }
+
+  return false
+}
+
 console.log(isItPossible('abcc', 'aab')) // t
-console.log(isItPossible('ac', 'b')) // f
-console.log(isItPossible('abcde', 'fghij')) // t
-console.log(isItPossible('a', 'bb')) // f
-console.log(isItPossible('aa', 'bbcc')) // f
-console.log(isItPossible('az', 'a')) // t
-console.log(isItPossible('ab', 'abcc')) // f
+// console.log(isItPossible('ac', 'b')) // f
+// console.log(isItPossible('abcde', 'fghij')) // t
+// console.log(isItPossible('a', 'bb')) // f
+// console.log(isItPossible('aa', 'bbcc')) // f
+// console.log(isItPossible('az', 'a')) // t
+// console.log(isItPossible('ab', 'abcc')) // f
