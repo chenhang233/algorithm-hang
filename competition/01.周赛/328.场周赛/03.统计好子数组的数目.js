@@ -4,15 +4,24 @@
  * @return {number}
  */
 var countGood = function (nums, k) {
-  const dp = Array.from({ length: nums.length }, () => 0)
   const map = new Map()
-  for (let i = 0; i < nums.length; i++) {
-    map.set(nums[i], (map.get(nums[i]) || 0) + 1)
-    if (i > 0) dp[i] = dp[i - 1]
-    if (map.get(nums[i]) > 1) dp[i]++
+  let left = 0,
+    right = 0,
+    result = 0,
+    temp = 0
+  while (right < nums.length) {
+    map.set(nums[right], (map.get(nums[right]) || 0) + 1)
+    temp += map.get(nums[right]) - 1
+    console.log(map, nums[right], 'temp ' + temp)
+    while (temp >= k) {
+      console.log(temp, k, left, right)
+      result += nums.length - right
+      temp -= map.get(nums[left]) - 1
+      map.set(map.get(nums[left++]) - 1)
+    }
+    right++
   }
-  console.log(dp)
-  return dp[nums.length - 1]
+  console.log(result, 'result')
 }
 
-console.log(countGood([3, 1, 4, 3, 2, 2, 4], 2))
+console.log(countGood([3, 1, 4, 3, 2, 2, 4], 3))
