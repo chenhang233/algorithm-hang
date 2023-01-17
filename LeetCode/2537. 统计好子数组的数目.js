@@ -21,8 +21,3 @@ var countGood = function (nums, k) {
   }
   return result
 }
-// 2 - 1
-// 3 - 2
-// 4 - 3 假如有4个一样的 拆分为 1 + 2 + 3 = 6种子数组
-
-console.log(countGood([3, 3, 1, 4, 3, 2, 2, 4], 3))
