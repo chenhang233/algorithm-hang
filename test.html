@@ -66,5 +66,158 @@
         }
       })
     </script>
+    <script>
+      ;() => {
+        const data = this.cid('data').selectedRow
+        console.log(data, 'data')
+        if (!data.length) {
+          this.src.tipDialog('选择数据进行编辑！')
+          return
+        }
+
+        // css string
+        const cssStr = this.cid('preview').cssStr
+
+        // catlog string
+        let catlogStr = ''
+        data[0].contents.forEach((item) => {
+          catlogStr += `<div class="catlog-row">
+			<div class="index">${item.dep}-${item.name}-${item.reportName}</div>
+            <div class="line"></div>
+      <div class="pageIndex">02</div>
+		</div>`
+        })
+
+        // table string
+        let tableStr = ''
+        data[0].briefList.forEach((bri) => {
+          const item = {}
+          for (const key in bri) {
+            if (bri[key] === undefined || bri[key] === null) {
+              item[key] = ''
+              continue
+            }
+            item[key] = bri[key]
+          }
+          // item.mainwork2 = item.mainwork.replaceAll(/\n/gm,'<br>')
+          // console.log(item.mainwork,'mainwork')
+          tableStr += `<p class="title">${item.dpartname}-${item.name}-${
+            item.themonth
+          }月述职报告</p>
+        <table border="2" bordercolor="black" cellspacing="0" cellpadding="5">
+        <tr>
+          <td>姓名</td>
+          <td>${item.name}</td>
+          <td>性别</td>
+          <td>${item.gender}</td>
+          <td>出生年月</td>
+          <td>${item.birthdate}</td>
+        </tr>
+        <tr>
+          <td>入职日期</td>
+          <td>${item.hiredate}</td>
+          <td>所在部门</td>
+          <td>${item.dpartname}</td>
+          <td>岗位</td>
+          <td>${item.position}</td>
+        </tr>
+        <tr>
+          <td>学历</td>
+          <td>${item.degree}</td>
+          <td>毕业院校</td>
+          <td>${item.school}</td>
+          <td>专业</td>
+          <td>${item.major}</td>
+        </tr>
+        <tr>
+          <td>带教老师</td>
+          <td>${item.tutor}</td>
+          <td>拟转正日期</td>
+          <td>${item.confirmdate}</td>
+          <td>报告时间</td>
+          <td>${item.briefmonthdate}</td>
+        </tr>
+        <tr rowspan="8">
+            <td class="td-container" colspan="6" rowspan="8">
+				<p class="header">月度述职：</p>
+                <p class="header">一、主要工作内容：</p>
+                <div class="header content">${item.mainwork}</div>
+                <p class="header">二、心得与感悟：</p>
+                <div class="header content">${item.experiences}</div>
+                <p class="header">三、下月计划：</p>
+                <div class="header content">${item.nextmonthplan}</div>
+                <div style="display: ${item.idea ? 'block' : 'none'}">
+                    <p class="header">四、意见、建议和需求：</p>
+                    <div class="header content">${item.idea}</div>
+                <div>
+			</td>
+        </tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+        <tr rowspan="6">
+          <td class="td-container" colspan="6" rowspan="6">
+            <p class="header">带教老师评价：</p>
+            <div class="content">${item.tutorcomment}</div>
+          </td>
+        </tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+        <tr rowspan="6">
+          <td class="td-container" colspan="6" rowspan="6">
+            <p class="header">部门负责人评价：</p>
+            <div class="content">${item.dpartheadcomment}</div>
+          </td>
+        </tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+      </table>
+      <div style="page-break-after:always;"></div>
+      `
+        })
+
+        // combine string
+        const htmlStr = `
+            <html lang="en">
+            <head>
+        <meta charset="UTF-8">
+        <title>述职报告</title>
+        <style type="text/css">
+          ${cssStr}
+        </style>
+      </head>
+      <body>
+          <div class="catlog">
+            <p class="catlog-title">目录</p>
+            ${catlogStr}
+          </div>
+          <div style="page-break-after:always;"></div>
+          ${tableStr}
+        
+      </body>
+            </html>`
+
+        console.log(htmlStr, 'htmlStr')
+        this.download(
+          '/do/3800.42',
+          { exportname: data[0]['exportname'], data: htmlStr },
+          (res) => {
+            if (res.code === 0) {
+              this.src.tipDialog(res.msg)
+            }
+          }
+        )
+      }
+    </script>
   </body>
 </html>
