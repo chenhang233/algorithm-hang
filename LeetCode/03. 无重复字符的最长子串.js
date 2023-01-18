@@ -15,7 +15,10 @@ var lengthOfLongestSubstring = function (s) {
       set.add(s.charAt(right + 1))
       right++
     }
+    console.log(set, right, i)
     max = Math.max(max, right - i + 1)
   }
   return max
 }
+
+console.log(lengthOfLongestSubstring('abcabcbb'))
