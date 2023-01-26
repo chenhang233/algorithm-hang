@@ -12,4 +12,7 @@ var sortColors = function (nums) {
     }
     nums[j] = temp
   }
+  console.log(nums)
 }
+
+sortColors([1, 0, 5, 4])
