@@ -10,7 +10,7 @@ var substringXorQueries = function (s, queries) {
       right = 0
     let flag = true
     while (right < s.length && left < s.length) {
-      if (s[left] == 0) {
+      while (s[left] == 0) {
         left++
         right++
       }
@@ -31,12 +31,12 @@ var substringXorQueries = function (s, queries) {
   return res
 }
 
-substringXorQueries('101101', [
-  [0, 5],
-  [1, 2],
-])
-substringXorQueries('0101', [[12, 8]])
-substringXorQueries('1', [[4, 5]])
+// substringXorQueries('101101', [
+//   [0, 5],
+//   [1, 2],
+// ])
+// substringXorQueries('0101', [[12, 8]])
+// substringXorQueries('1', [[4, 5]])
 substringXorQueries('001', [
   [1, 0],
   [1, 0],
@@ -53,3 +53,5 @@ substringXorQueries('001', [
   [2, 3],
   [4, 5],
 ])
+
+// 6356. 子字符串异或查询
