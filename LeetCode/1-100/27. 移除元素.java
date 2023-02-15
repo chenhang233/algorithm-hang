@@ -16,4 +16,13 @@ class Solution {
         }
         return result;
     }
+    public int removeElement(int[] nums, int val) {
+ int left = 0;
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] == val) continue;
+            nums[left++] = nums[i];
+        }
+        return left;
+    }
 }
