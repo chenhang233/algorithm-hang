@@ -14,4 +14,21 @@ class Solution {
         }
         return minLen == Integer.MAX_VALUE ? 0 : minLen;
     }
+    public int minSubArrayLen(int target, int[] nums) {
+ int left = 0, right = 0,count = 0;
+        int n = nums.length;
+        count += nums[0];
+        int res = Integer.MAX_VALUE;
+           while (right < n) {
+            int t =right - left + 1;
+            if (count >= target) {
+                res = Math.min(res,t);
+                count -= nums[left++];
+            } else {
+                 if (right == n -1) break;
+                count += nums[++right];
+            }
+        }
+        return res == Integer.MAX_VALUE ? 0 :res;
+}
 }
