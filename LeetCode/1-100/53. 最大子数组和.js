@@ -7,7 +7,9 @@ var maxSubArray = function (nums) {
     max = nums[0]
   nums.forEach((v) => {
     prev = Math.max(prev + v, v)
+    console.log(prev, 'prev')
     max = Math.max(max, prev)
+    console.log(max, 'max')
   })
   return max
 }
