@@ -1,0 +1,2 @@
+# Write your MySQL query statement below
+SELECT name,IFNULL(SUM(distance),0) travelled_distance FROM Users t1 LEFT JOIN Rides t2 ON t1.id = t2.user_id GROUP BY t1.id ORDER BY travelled_distance DESC,name; 
