@@ -18,4 +18,23 @@ class Solution {
         }
         return  Arrays.copyOfRange(intersection,0,index);
     }
+      public int[] intersect2(int[] nums1, int[] nums2) {
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        int l = 0,r = 0,index= 0;
+        int len1 = nums1.length,len2 =nums2.length;
+        int[] intersection = new int[Math.min(len1,len2)];
+        while (l < len1 && r < len2) {
+            if (nums1[l] == nums2[r]) {
+                intersection[index++] = nums1[l];
+                l++;
+                r++;
+            } else if (nums1[l] < nums2[r]) {
+                l++;
+            } else {
+                r++;
+            }
+        }
+        return Arrays.copyOfRange(intersection,0,index);
+    }
 }
