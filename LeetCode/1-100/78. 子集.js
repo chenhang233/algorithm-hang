@@ -33,3 +33,5 @@ var subsets2 = function (nums) {
   dfs(0, [])
   return res
 }
+
+console.log(subsets2([2, 4, 6]))
