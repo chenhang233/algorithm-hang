@@ -24,6 +24,7 @@ var subsets = function (nums) {
 var subsets2 = function (nums) {
   const res = []
   const dfs = (c, path) => {
+    console.log(path, 'path', c)
     if (c === nums.length) return res.push([...path])
     path.push(nums[c])
     dfs(c + 1, path)
