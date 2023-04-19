@@ -47,3 +47,5 @@ var searchRange2 = function (nums, target) {
   }
   return result
 }
+
+console.log(searchRange2([2, 2], 3))
