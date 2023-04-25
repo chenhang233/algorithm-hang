@@ -18,3 +18,4 @@ class Solution {
         return Math.min(start[x - 1], 0);
     }
 }
+
