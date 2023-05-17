@@ -20,3 +20,15 @@ int rob(int *nums, int numsSize)
     }
     return dp[numsSize - 1];
 }
+
+int rob(int *nums, int numsSize)
+{
+    int prev = 0, cur = 0;
+    for (int i = 0; i < numsSize; i++)
+    {
+        int temp = max(prev + *(nums + i), cur);
+        prev = cur;
+        cur = temp;
+    }
+    return cur;
+}
