@@ -4,6 +4,7 @@
     "cmath": "c",
     "math.h": "c",
     "climits": "c",
-    "limits.h": "c"
+    "limits.h": "c",
+    "589. N 叉树的前序遍历.C": "cpp"
   }
 }
