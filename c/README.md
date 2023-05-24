@@ -331,10 +331,98 @@ NOP(空操作)指令: 占一个字节,无操作(代码对齐 x86 从双字的偶
 	array WORD 5 DUP(?) ;5个数值,未初始化
 ```
 
+###### 3.3 小端顺序
+
+```
+x86处理器在内存中按小端顺序(低到高)存放检索数据.
+.DATA ? 伪指令声明未初始化数据(可以减少编译程序大小)
+	.data ?
+	array DWORD 5000 DUP(?) ;20000字节,未初始化
+	
+	.data 
+	array DWORD 5000 DUP(?) ;20000字节,初始化,程序会多出20000字节
+```
+
 
 
 ##### 4.  符号常量
 
+###### 4.1  等号伪指令
+
+```
+把一个符号名称和一个表达式相连
+	name = expression
+	COUNT = 500
+
+当前地址计数器 $
+	selfPtr DWORD $
+计算数组字符串大小
+	list BYTE 10,20,30
+	listSize = ($ - list)
+非字节
+	lsit2 WORD 100h,101h,110h
+	list2Size = ($ - list2) / 2
+```
+
+###### 4.2  EQU伪指令
+
+```c
+把一个符号名称和一个整数表达式或文本连接,格式:
+	name EQU expression
+	name EQU symbol(已存在符号名称)
+	name EQU <text>
+
+10*10元素矩阵
+	matrix1 EQU 10*10
+	matrix2 EQU <10 * 10>
+	.data
+	M1 WORD matrix1
+    M2 WORD matrix2   
+    COMMENT #
+	M1计算表达式得到 M1 WORD 100
+	M2文本直接复制 M2 WORD 10 * 10
+	#
+```
+
+###### 4.3 TEXTEQU伪指令
+
+```
+文本宏,格式:
+	name TEXTEQU <text>
+	name TEXTEQU textmacro(已有文本宏内容)
+	name TEXTEQU %constExpr(整数常量表达式)
+	
+例子:
+	msg TEXTEQU <"do you wish to continue ?">
+	.data
+	prompt BYTE msg
+	
+	rowSize = 5
+	count TEXTEQU %(rowSize * 2)
+	move TEXTEQU <mov>
+	setupAL TEXTEQU <move al,count>
+	; 得到结果 mov al, 10
+```
+
 
 
 ##### 5.  64位编程
+
+```
+ExitProcess PROTO 
+.data 
+sum QWORD 0 ;64位整数,Q代表4字
+
+.code 
+main PROC
+ mov rax,5
+ mov rax,6
+ mov sum,rax
+ mov rax,0
+ call ExitProcess
+main ENDP 
+END 
+
+无法运行
+```
+
