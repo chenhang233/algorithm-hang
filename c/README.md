@@ -408,21 +408,173 @@ x86处理器在内存中按小端顺序(低到高)存放检索数据.
 
 ##### 5.  64位编程
 
-```
-ExitProcess PROTO 
-.data 
-sum QWORD 0 ;64位整数,Q代表4字
+###### 5.1 汇编文件名称.asm
 
+```c
+.data
+ 
+    msgCaption  db 'Message box text',0
+ 
 .code 
-main PROC
- mov rax,5
- mov rax,6
- mov sum,rax
- mov rax,0
- call ExitProcess
-main ENDP 
-END 
-
-无法运行
+align 16
+ 
+extern GetMsgBoxType : proc
+extern MessageBoxA : proc
+extern __imp_MessageBoxA : qword
+ 
+ 
+asm_func proc
+    ; RCX = address for the string for the message box
+    sub     rsp, 28h        ; shadow stack only [n]8 size
+     
+    lea     rdx, [msgCaption]
+    mov     r8, rcx
+ 
+    call    GetMsgBoxType
+    mov     r9, rax
+    xor     rcx, rcx
+     
+    ;call   [__imp_MessageBoxA]
+    call MessageBoxA
+ 
+    add     rsp, 28h        ; restoring shadow stack
+    ret
+asm_func endp
+ 
+end
 ```
 
+###### 5.2 main.c
+
+```c
+#include <Windows.h>
+
+extern "C" void  __stdcall asm_func(const char* lpText);
+
+extern "C" UINT GetMsgBoxType()
+{
+    return MB_YESNOCANCEL;
+}
+
+int main()
+{
+    asm_func("Hello world!");
+    return 0;
+}
+```
+
+#### 4. 数据传送、寻址和算术运算
+
+
+
+##### 4.1 数据传送指令
+
+###### 4.1.1 MOV指令 
+
+```
+将源操作数复制到目的操作数
+	MOV destination,source
+	
+	.data
+	var1 WORD ?
+	.code
+	MOV ax,var1
+规则:
+	1.两个操作数必需同样大小
+	2.两个操作数不能同时为内存操作数
+	3.指令指针寄存器(IP、EIP、RIP)不能作为目标操作数
+
+覆盖值:
+	.data
+	by1 BYTE 78h
+	word1 WORD 1234h
+	dword1 DWORD 12345678h
+	.code
+	MOV eax,0 ; 	EAX = 00000000h
+	MOV al,by1; 	EAX = 00000078h
+	MOV ax,word1; 	EAX = 00001234h;
+	MOV eax,dword1; EAX = 12345678h;
+	mov ax,0		EAX = 12340000h;
+```
+
+###### 4.1.2 MOVZX指令
+
+```
+将源操作数复制到目的操作数(全零扩展,把目标操作数的0扩展16位,32位)
+	MOV bx,0A69Bh 		;EAX = 0000A69Bh
+	MOVZX eax,bx		;EAX = 0000A69Bh
+	MOVZX edx,bl		;EDX = 0000009bh
+    MOVZX cx,bl			;CX  = 009bh
+```
+
+###### 4.1.3 MOVSX指令
+
+```
+将源操作数复制到目的操作数(全零扩展,把目标操作数的1扩展16位,32位)
+	MOV bx,0A69Bh 	;前面加0,防止汇编器把常数当标识符
+	MOVSX eax,bx	;EAX = FFFFA69Bh
+	MOVSX edx,bl	;EDX = FFFFFF9Bh
+	MOVSX cx,bl		;CX = FF9Bh
+```
+
+###### 4.1.4 LAHF和SAHF指令
+
+```
+LAHF(加载状态标志位到AH) 将EFLAGS寄存器低字节复制到AH
+.data
+save BYTE ?
+.code
+LAHF		;将标志位加载到AH
+MOV save,ah	;存到变量
+
+SAHF(保存AH内容到状态标志位)将AH内容复制到EFLAGS寄存器低字节
+MOV ah,save;加载到ah
+SAHF	   ;复制到eflags寄存器
+```
+
+###### 4.1.5 XCHG指令
+
+```
+交换两个操作数内容(交换数据)
+	XCHG ax,bx	;交换16位寄存器内容
+	XCHG ah,ak  ;交换8位寄存器内容
+交换两个内存操作室:
+	MOV ax,val1
+	XCHG ax,val2;
+	MOV val1,ax;
+```
+
+###### 4.1.6 偏移量操作数
+
+```
+变量偏移量加上常数形成有效地址(加一代表1个字节)
+array BYTE 10h,20h,30h,40h,50h
+MOV al,array 	;al=10h
+MOV al,[array+1];al = 20h
+
+在16位的字数组中,每个数组元素偏移量比前一个多2个字节(16位)
+	.data
+	arr WORD 100h,200h
+	.code
+	MOV ax,arr	;ax=100h
+	MOV ax,[arr + 2];ax = 200h
+如果是双字数组,DWORD 4字节(32位) 加4才能走一个元素
+```
+
+
+
+##### 4.2 加减法
+
+
+
+##### 4.3 数据相关的运算符和伪指令
+
+
+
+##### 4.4 间接寻址
+
+
+
+##### 4.5 JMP和LOOP指令
+
+##### 4.6 64位编程
