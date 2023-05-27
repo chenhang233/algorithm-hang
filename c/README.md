@@ -565,6 +565,68 @@ MOV al,[array+1];al = 20h
 
 ##### 4.2 加减法
 
+###### 4.2.1 INC和DEC指令
+
+```
+INC(增加) DEC(减少) 指令分别改变寄存器或内存操作数加一减一.(不会影响进位标志位)
+	.data
+	myw WORD 1000h
+	.code
+	INC myw		;myw = 1001h
+	MOV bx,myw  
+    DEC bx		;bx = 1000h
+ 
+```
+
+###### 4.2.2 ADD指令
+
+```
+将长度相同的源操作数和目的操作数相加,和存放目标操作室.
+	.data
+	var1 WORD 1000h;
+	var2 WORD 2000h;
+	.code
+	MOV eax,var1	; eax 1000h
+	ADD eax,var2	; eax 3000h
+```
+
+###### 4.2.3 SUB指令
+
+```
+从目的操作数减去源操作数.
+	.data
+	var1 WORD 1000h;
+	var2 WORD 2000h;
+	.code
+	MOV eax,var2	; eax 2000h
+	SUB eax,var1	; eax 1000h
+```
+
+###### 4.2.4 NEG 指令
+
+```
+把操作数转换为其二进制补码,将符号取反
+	NEG 同样寄存器
+	NEG 内存操作数
+```
+
+###### 4.2.5 练习
+
+```
+翻译 r1 = -r2 + (r3 - r4);
+	r1 SDWORD ?
+	r2 SDWORD 26
+	r3 SDWORD 20
+	r4 SDWORD 15
+	.code
+	MOV eax,r2	
+	NEG	eax		;-26
+	MOV ebx,r3
+	SUB ebx,r4	;ebx=5
+    ADD eax,ebx ;eax=-21
+    MOV r1,eax
+```
+
 
 
 ##### 4.3 数据相关的运算符和伪指令
