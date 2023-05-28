@@ -631,6 +631,93 @@ INC(增加) DEC(减少) 指令分别改变寄存器或内存操作数加一减�
 
 ##### 4.3 数据相关的运算符和伪指令
 
+```
+运算符和伪指令由汇编器解析.
+```
+
+###### 4.3.1 OFFSET 运算符
+
+```
+返回一个变量与其所在段起始地址之间的距离
+	.data
+	bval BYTE ?
+	wval WORD ?
+	dval DWORD ?
+	dval2 DWORD ?
+	.code ; 假设bval偏移量为 0040 4000 h
+	mov esi,OFFSET bval		;esi=0040 4000h
+	mov esi,OFFSET wval		;esi=0040 4001h
+	mov esi,OFFSET dval		;esi=0040 4003h
+	mov esi,OFFSET dval2	;esi=0040 4007h
+	
+用于直接偏移量
+	.data
+	arr WORD 1,2,3,4,5
+	.code
+	mov esi,OFFSET arr + 4	;esi存的是3的地址
+```
+
+###### 4.3.1.2 ALIGN 伪指令
+
+```
+将一个变量对齐到字节边界、字边界、双字边界或段落边界
+	ALING bound 
+bound取值
+	1: 下一个变量对齐1字节边界(默认)
+	2: 下一个变量对齐于偶数地址
+	4: 下一个变量对齐于4的倍数
+	8: 下一个变量对齐于8的倍数
+	16:下一个变量对齐于16的倍数
+```
+
+###### 4.3.2 PTR 运算符
+
+```
+重写操作数默认大小类型
+将较小值送人较大目的操作数:
+	.data 
+	wordList WORD 5678h,1234h
+	.code
+	mov eax,DWORD PTR wordList ;小端存储格式从低地址到高地址 eax= 12345678jh
+```
+
+###### 4.3.3 TYPE 运算符
+
+```
+返回一个操作数或数组中每个元素大小(字节计)
+TYPE BYTE 1
+TYPE WORD 2
+TYPE DWORD 4
+TYPE QWORD 8
+```
+
+###### 4.3.4 LENGHTOF 运算符
+
+```
+返回数组中元素个数,如果数组嵌套返回乘积
+	.data
+    by1 BYTE 10,20,30
+    arr WORD 30 DUP(?),0,0
+    arr2 WORD 5 DUP(3 DUP(?))
+    LENGHTOF by1	;3
+    LENGHTOF arr	;32
+    LENGHTOF arr2	;15
+```
+
+###### 4.3.5 SIZEOF 运算符
+
+```
+返回数组初始化时使用的字节数
+```
+
+###### 4.3.6 LABEL 伪指令
+
+```
+用不同大小类型重新定义同一个变量
+```
+
+
+
 
 
 ##### 4.4 间接寻址
