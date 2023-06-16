@@ -27,3 +27,33 @@ func lenLongestFibSubseq(arr []int) int {
 	}
 	return maxLength
 }
+
+
+func lenLongestFibSubseq(arr []int) int {
+	n := len(arr)
+	m := make(map[int]int,n)
+	ans := 0
+	for i,x := range arr {
+		m[x] = i
+	}
+	dp := make([][]int,n)
+	for i := range dp {
+		dp[i] = make([]int,n)
+	}
+	for i,x := range arr {
+		for j:= n -1; j >= 0 && arr[j]*2 > x; j-- {
+			if k,ok := m[x - arr[j]]; ok {
+				dp[j][i] = max(dp[k][j] + 1,3)
+				ans = max(dp[j][i],ans)		
+			}
+		}
+	}
+	return ans
+}
+
+func max(a,b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
