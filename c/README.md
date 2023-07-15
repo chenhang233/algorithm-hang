@@ -299,7 +299,7 @@ NOP(空操作)指令: 占一个字节,无操作(代码对齐 x86 从双字的偶
 初始值: 可以用 ? 不对变量初始化
 多初始值: 标号只指出第一个初始值的偏移量
 	list BYTE 10,20,30    偏移: 0000,0001,0002
-字符串: greeting BYTE "hello world",0
+字符串: greeting BYTE "hello world",0 (空字节结束)
 ```
 
 |  类型  |              用法               |
@@ -813,3 +813,88 @@ L1:
 
 
 ## 5. 过程
+
+##### 5.1 堆栈
+
+###### 5.1.1 运行时堆栈(runtime stack)
+
+```
+	是内存数组,CPU用ESP(extended stack pointer 扩展堆栈指针)寄存器对其直接管理.运行时堆栈在内存中向下生长,从高地址向低地址扩展.
+```
+
+###### 5.1.2 PUSH和POP指令
+
+```
+PUSH 减少ESP的值,将源操作数复制到堆栈
+POP 把ESP指向的堆栈元素内容复制到一个16位或者32位操作数,再增加ESP的值.
+```
+
+###### 5.1.3 PUSHFD和POPFD指令
+
+```
+PUSHFD 32位EFLAGS寄存器内容入栈
+POPFD  栈顶单元内容弹出到EFLAGS寄存器
+```
+
+###### 5.1.4 PUSHAD 、PUSHA、PUSHA、POPA
+
+```
+PUSHAD 按EAX、ECX、EDX、EBX、ESP、EBP、ESI、EDI顺序,将所有32位通用寄存器入栈
+POPAD  按相反顺序将寄存器弹出堆栈
+PUSHA  按AX、CX、DX、BX、SP、BP、SI、DI顺序将16位通用寄存器入栈.
+POPA   按相反顺序将寄存器弹出堆栈
+```
+
+###### 5.1.5 字符串反转
+
+```
+.386 ; 表示32位程序,能访问32位寄存器和地址
+.model flat,stdcall ;程序内存模式(flat 保护模式) 子程序调用规范(stdcall)
+.stack 4096 ; 为运行时堆栈保留4096字节空间
+ExitProcess PROTO, dwExitCode: DWORD ;windows服务,调用   DWORD(32位无符号整数)
+.data
+	aName BYTE "hello world",0
+	nameSize = ($ - aName) - 1
+.code
+main PROC
+; 将名字入栈
+	mov ecx,nameSize	
+	mov esi,0
+
+L1:
+	movzx eax,aName[esi]
+	push eax
+	inc esi
+	loop L1
+; 将名字逆序弹出栈,存入aName
+	mov ecx,nameSize
+	mov esi,0
+L2:
+	pop eax    			;获取字符
+	mov aName[esi],al 	;存入字符
+	inc esi
+	loop L2
+ INVOKE ExitProcess,0
+main ENDP ;标记一个过程结束
+END main ;标记程序结束
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
