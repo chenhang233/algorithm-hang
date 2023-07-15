@@ -733,7 +733,7 @@ val1和val2共享同一内存位置,LABEL指令不分配内存
 使用寄存器作为指针(间接寻址)并控制该寄存器的值.如果一个操作数使用的是间接寻址,就称为间接操作数.
 ```
 
-##### 4.4.1 间接操作数
+##### 4.4.1 间接操作数[]
 
 ```
 保护模式 
@@ -880,15 +880,56 @@ END main ;标记程序结束
 
 ```
 
+##### 5.2 定义和使用过程
 
+###### 5.2.1 PROC 伪指令
 
+```
+定义过程
+	main PROC
+	...
+	main ENDP
+在程序启动过程之外创建一个过程时,通过ret指令强制CPU返回到该过程被调用的位置
+```
 
+###### 5.2.2 CALL和RET 指令
 
+```
+CALL调用一个过程,处理器从新内存地址开始执行.
+调用和返回:
+	1.call指令将返回地址(call的下一条指令地址)入栈
+	2.被调用过程地址复制到指令指针寄存器(EIP)
+	3.当过程准备返回,RET指令从堆栈把返回地址弹出到EIP(32位 EIP 16位 IP)
+```
 
+###### 5.2.3 USES 运算符
 
-
-
-
+```
+USES和PROC一起使用,列出要修改寄存器名.代替PUSH和POP做的事.
+	arraySum PROC USES esi ecx
+		mov eax,0
+	L1:
+	add eax,[esi]
+	add esi,TYPE DWORD
+	loop L1
+	ret
+	arraySum ENDP
+	
+	等同于:-------------
+	
+	arraySum PROC 
+	push esi
+    push ecx
+		mov eax,0
+	L1:
+	add eax,[esi]
+	add esi,TYPE DWORD
+	loop L1
+	pop ecx
+	pop esi
+	ret
+	arraySum ENDP
+```
 
 
 
