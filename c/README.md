@@ -1111,19 +1111,20 @@ LOOPZ LOOP指令加上零标志位为1跳转
 LOOPE 等同于LOOPZ
 ```
 
+###### 6.3.2 LOOPNZ和LOOPNE指令
+
+```
+LOOPNZ 非零跳转
+LOOPNE 等同于LOOPNZ
+```
 
 
 
+## 7.整数运算
 
 
 
-
-
-
-
-
-
-
+## 8.高级过程
 
 
 
