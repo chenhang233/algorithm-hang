@@ -6,6 +6,8 @@
     "climits": "c",
     "limits.h": "c",
     "589. N 叉树的前序遍历.C": "cpp",
-    "utility": "cpp"
+    "utility": "cpp",
+    "wchar.h": "c",
+    "dirent.h": "c"
   }
 }
