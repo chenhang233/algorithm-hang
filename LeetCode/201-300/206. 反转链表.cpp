@@ -26,3 +26,21 @@ public:
         return  prev;
     }
 };
+
+
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        if (head == nullptr) {
+            return head;
+       }
+       return reverseFn(nullptr,head);
+    }
+    ListNode* reverseFn(ListNode*prev, ListNode* cur) {
+        if (cur == nullptr) return prev;
+        ListNode* next = cur->next;
+        cur->next = prev;
+        prev = cur;
+        return reverseFn(prev,next);
+    }
+};
