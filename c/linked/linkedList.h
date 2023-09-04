@@ -4,7 +4,7 @@
 
 typedef struct Node
 {
-    int intV;
+    void *data;
     struct Node *next;
 } Node;
 
@@ -14,9 +14,8 @@ typedef struct LinkedList
     int len;
 } LinkedList;
 
-Node *create_node(int);
 LinkedList *init();
-int add_l(LinkedList *, int);
-int remove_l(LinkedList *, Node *);
-int update_l(LinkedList *, Node *, int v);
-void forEach_l(LinkedList *);
+int add_l(LinkedList *, void *);
+int remove_l(LinkedList *, void *);
+int update_l(LinkedList *, void *, void *);
+void forEach_l(LinkedList *, void (*printFn)(void *));
