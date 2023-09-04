@@ -21,7 +21,9 @@ int main(int argc, char const *argv[])
     remove_l(list, &a);
     forEach_l(list, pr);
     update_l(list, &b, &d);
-    char e[] = "1111";
+    char e[] = "123";
+    printf("e p : %p %p \n", e, &e);
+    printf("e p : %c %c \n", *(e + 1), *(&e + 1));
     LinkedList *list2 = init();
     add_l(list2, (void *)e);
     return 0;
