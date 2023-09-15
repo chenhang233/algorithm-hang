@@ -5,10 +5,8 @@ import glob
 directory = '../LeetCode/1-100'
 # directory = 'C:\\Users\\chenhang\\Desktop\\code\\algorithm\\LeetCode\\1-100\\'
 # 使用glob模块匹配以.js结尾的文件
-files = glob.glob(os.path.join(directory, '*.txt'))
+files = glob.glob(os.path.join(directory, '*.js'))
 
-print(files)
-print(directory)
 
 # 循环遍历文件列表并删除每个文件
 for file in files:
