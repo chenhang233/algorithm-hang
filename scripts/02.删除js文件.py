@@ -2,7 +2,7 @@ import os
 import glob
 
 # 指定要删除文件的目录
-directory = '../LeetCode/101-200'
+directory = '../LeetCode'
 # directory = 'C:\\Users\\chenhang\\Desktop\\code\\algorithm\\LeetCode\\100-200\\'
 # 使用glob模块匹配以.js结尾的文件
 files = glob.glob(os.path.join(directory, '*.js'))
