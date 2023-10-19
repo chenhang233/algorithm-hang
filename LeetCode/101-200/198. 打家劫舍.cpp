@@ -9,4 +9,14 @@ public:
         }
         return cur;
     }
+        int rob(vector<int>& nums) {
+        int prev = 0,cur = 0,ans = 0;
+        int n = nums.size();
+        for (int i = 0; i < n; i++) {
+            ans = max(nums[i] + prev, cur);
+            prev = max(prev,cur);
+            cur = ans;
+        }
+        return ans;
+    }
 };
