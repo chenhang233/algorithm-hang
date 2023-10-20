@@ -22,10 +22,10 @@ int deleteAndEarn(int *nums, int numsSize)
 
     for (int i = 0; i < numsSize; i++)
     {
-        printf("arr[*(nums + i)]=%d %d %d\n", arr[*(nums + i)], i, *(nums + i));
         arr[*(nums + i)] += *(nums + i);
     }
-    for (int i = 0; i < numsSize; i++)
+
+    for (int i = 0; i < max_num + 1; i++)
     {
         printf("arr[i]=%d \n", arr[i]);
     }
