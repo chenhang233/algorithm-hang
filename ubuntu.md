@@ -6,9 +6,13 @@
     iw list
 ```
 
+步骤 2：建立新的热点
+
+```
 $ IFNAME="wlx90de80e6180c"
 $ CON_NAME="hang-server233"
 $ nmcli con add type wifi ifname $IFNAME con-name $CON_NAME autoconnect yes ssid $CON_NAME
+```
 
 步骤 3：设定连线方式
 通过以下命令将连接方式设置为共享。
