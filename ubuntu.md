@@ -11,6 +11,7 @@
 ```
 $ IFNAME="wlx90de80e6180c"
 $ CON_NAME="hang-server233"
+新增连接：
 $ nmcli con add type wifi ifname $IFNAME con-name $CON_NAME autoconnect yes ssid $CON_NAME
 ```
 
@@ -44,7 +45,7 @@ Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkMa
     nmcli connection show $CON_NAME
 ```
 
-步骤 5：确认 IP 信息。
+步骤 5 显示所有网络连接的信息:
 
 ```
         nmcli connection show
