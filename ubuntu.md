@@ -56,3 +56,9 @@ Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkMa
 ```
     nmcli connection delete <SSID>
 ```
+
+显示“xx”连接配置文件的详细信息。
+
+```
+     nmcli -p connection show "hang-server233"
+```
