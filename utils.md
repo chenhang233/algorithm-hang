@@ -1,3 +1,9 @@
+#### 查看配置列表
+```
+git config --list
+git config <key>
+```
+
 #### 配置git代理 socks:
 
 ```
