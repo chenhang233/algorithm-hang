@@ -1,1 +1,1 @@
-算法记录
+algorithm
