@@ -1,0 +1,45 @@
+{
+  "switch": true,
+  "mode": 0,
+  "ban_time": 10,
+  "tax_rate": 0,
+  "settle_duration": 55,
+  "task_base_duration": 60,
+  "bet_array": [10, 100, 1000],
+  "special_cell": {
+    "type1": {
+      "max_restart": 3,
+      "settle_interval": 5
+    }
+  },
+  "probability_list": [
+    {
+      "rate": 0,
+      "weight": 10
+    },
+    {
+      "rate": 2,
+      "weight": 100
+    },
+    {
+      "rate": 5,
+      "weight": 56
+    },
+    {
+      "rate": 10,
+      "weight": 43
+    },
+    {
+      "rate": 20,
+      "weight": 30
+    },
+    {
+      "rate": 25,
+      "weight": 10
+    },
+    {
+      "rate": 50,
+      "weight": 5
+    }
+  ]
+}
