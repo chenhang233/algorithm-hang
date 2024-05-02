@@ -54,6 +54,7 @@ Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkMa
 删除 wifi 连接信息：
 
 ```
+    nmcli connection down hang-server233 关闭
     nmcli connection delete <SSID>
 ```
 
