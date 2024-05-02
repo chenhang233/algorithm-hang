@@ -63,3 +63,12 @@ Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkMa
 ```
      nmcli -p connection show "hang-server233"
 ```
+
+
+
+连接wifi
+```
+    nmcli device wifi list
+    nmcli device wifi connect YOUR_SSID password YOUR_PASSWORD
+    nmcli -f IN-USE,SSID,RSNA,SIGNAL dev wifi
+```
