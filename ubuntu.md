@@ -54,6 +54,7 @@ Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkMa
 删除 wifi 连接信息：
 
 ```
+    nmcli connection down hang-server233 关闭
     nmcli connection delete <SSID>
 ```
 
@@ -61,4 +62,21 @@ Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkMa
 
 ```
      nmcli -p connection show "hang-server233"
+```
+
+
+
+连接wifi
+```
+    nmcli device wifi list
+    nmcli device wifi connect YOUR_SSID password YOUR_PASSWORD
+    nmcli -f IN-USE,SSID,RSNA,SIGNAL dev wifi
+```
+配置已连接wifi地址
+```
+nmcli con mod 25-13_5G ipv4.addresses 192.168.1.11/24
+nmcli con mod 25-13_5G ipv4.gateway 192.168.1.1
+nmcli con mod 25-13_5G ipv4.dns 192.168.1.1
+nmcli con mod 25-13_5G ipv4.method manual
+nmcli con up 25-13_5G
 ```
