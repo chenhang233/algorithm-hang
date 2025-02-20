@@ -51,7 +51,7 @@ def auto_linux_cmd(servers: list, commands: list, local_filepath: str = "", remo
     
     
 basic_servers = [
-    {"host": "115.29.215.64", "port": 22, "username": "root", "password": "vyXtZkeIdjZ3JaGY", "name": "基础服务"}
+    {"host": "192.168.0.5", "port": 22, "username": "", "password": "", "name": ""}
 ]
 
 version_name = "hymx_base_server-v2.1.0"
