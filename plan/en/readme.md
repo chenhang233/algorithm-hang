@@ -63,4 +63,14 @@ papa rabbit smells nice.
 
 ### 动词语法框架
 
-![](C:\Users\chenhang\Desktop\code\algorithm-hang\images\Snipaste_2025-04-04_15-38-58.png)
+![](../../images\Snipaste_2025-04-04_15-38-58.png)
+
+## 2.动词分类
+
+![](../../images\Snipaste_2025-04-05_10-46-49.png)
+
+## 3.动词时态
+
+### 时间 + 状态
+
+![](../../images\Snipaste_2025-04-05_11-18-00.png)
