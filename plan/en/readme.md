@@ -74,3 +74,29 @@ papa rabbit smells nice.
 ### 时间 + 状态
 
 ![](../../images\Snipaste_2025-04-05_11-18-00.png)
+
+#### ‌**过去分词与过去式的核心区别**
+
+```
+过去式用于一般过去时作谓语，而过去分词主要用于完成时态、被动语态及非谓语成分‌
+
+一、含义与功能差异
+‌过去式‌
+表示过去某个时间发生的具体动作或状态，强调动作的“发生”本身（如：She played basketball yesterday）
+在句中‌独立作谓语‌，无需助动词辅助。‌
+‌过去分词‌
+侧重表达‌被动或完成的意义‌（如：The window was broken 表被动；I have finished homework 表完成）。
+‌不能单独作谓语‌，需与助动词（如 have/has/had 或 be 动词）结合使用。
+二、用法差异
+‌过去式‌
+用于一般过去时，常搭配明确的时间状语（如 yesterday、last week）。 ‌
+示例：He visited Paris last year（谓语为 visited）。‌
+‌过去分词‌
+‌完成时态‌：结构为 have/has/had + 过去分词（如：They have written a report）。
+‌被动语态‌：结构为 be + 过去分词（如：The book was written by him）。 ‌
+‌非谓语功能‌：可作定语（broken window）、表语（The door is locked）或状语。‌
+```
+
+#### 动词时态
+
+![](../../images\Snipaste_2025-04-06_09-16-15.png)
