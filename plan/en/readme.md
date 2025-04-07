@@ -100,3 +100,35 @@ papa rabbit smells nice.
 #### 动词时态
 
 ![](../../images\Snipaste_2025-04-06_09-16-15.png)
+
+## 4.动词语气(虚拟语气)
+
+```
+1. 直陈语气 (Indicative Mood)
+定义：用于陈述事实、意见或疑问。这是最常用的语气。
+用法：
+陈述事实：She is a teacher.
+描述习惯：They play soccer every weekend.
+提问：Are you coming to the party?
+
+2. 虚拟语气 (Subjunctive Mood)
+定义：用于表达假设、愿望、建议、要求或不真实的情况。
+用法：
+表达愿望：I wish he were here.
+表达假设：If I were rich, I would travel the world.
+表达建议或要求：It is essential that he be present.
+
+3. 命令语气 (Imperative Mood)
+定义：用于发出命令、请求或建议，通常主语为“你”（you），但在句子中省略。
+用法：
+直接命令：Sit down.
+请求：Please pass the salt.
+劝告：Take a break.
+总结
+直陈语气：用于简单的陈述和疑问。
+虚拟语气：用于表达人们的愿望、建议、假设等。
+命令语气：用于直接发出命令或请求。
+```
+
+
+
