@@ -130,5 +130,149 @@ papa rabbit smells nice.
 命令语气：用于直接发出命令或请求。
 ```
 
+## 5.非谓语动词
 
+#### 谓语动词和非谓语动词的区别
+
+```
+1. 谓语动词 (Finite Verbs)
+定义：谓语动词是句子的主要动词，可以表现出时态、数和人称。它是每个完整句子的核心，通常用于描述动作或状态。
+特点：
+受主语的影响，动词形式会随着主语的人称和数的变化而变化。
+
+例如：
+He runs. (第三人称单数)
+They run. (复数)
+谓语动词可以表示不同的时态，如现在时、过去时、将来时等。
+
+示例：
+She is reading a book.
+They played soccer yesterday.
+
+2. 非谓语动词 (Non-finite Verbs)
+定义：非谓语动词不受主语的人称、数的影响，不能单独作为句子的谓语。它通常用于动词短语、补充句子结构或作为其他动词的附属成分。
+特点：
+非谓语动词形式包括不定式（to + 动词原形）、动名词（动词 + ing 形式）和过去分词（动词的过分形式）。不同于谓语动词，非谓语动词不能单独表示一个完整的动作或状态。
+
+示例：
+Infinitive (不定式)：I want to eat.
+Gerund (动名词)：Eating is fun.
+Past Participle (过去分词)：The book is written by John.
+
+总结
+谓语动词：
+	可以独立作为句子的核心动词。受主语影响，表现时态、数和人称。
+	例子：He plays football.
+
+非谓语动词：
+	不能单独作为句子的核心动词，通常用于其他动词的补充。不受主语影响。
+	例子：I enjoy playing football. / I want to play football.
+```
+
+## 6.独立主格
+
+![](../../images\Snipaste_2025-04-19_13-58-42.png)
+
+## 7.助动词&情态动词
+
+ 
+
+![](../../images\Snipaste_2025-04-19_14-34-05.png)
+
+#### 助动词 (Auxiliary Verbs)
+
+```
+助动词用于构成时态、语态或其他语法结构。主要分为两类：主要助动词和次要助动词。
+
+1. 主要助动词
+	Be、Have、Do。
+	用法：
+	Be：用于进行时和被动语态。
+	例：She is reading. (进行时)
+	The book was written by John. (被动语态)
+	
+	Have：用于完成时。
+	例：They have eaten lunch.
+	
+	Do：用于疑问句和否定句。
+	例：Do you like coffee? / I do not understand.
+
+2. 次要助动词
+用于构成时态，如：
+	例：She is() going to the store.
+	例：They have() been waiting.
+```
+
+#### 情态动词 (Modal Verbs)
+
+```
+情态动词用于表达能力、可能性、必要性或许可等。情态动词的特点是没有人称和时态变化。
+
+常见情态动词:
+	Can：表示能力或可能性。
+	例：She can swim.
+	
+	Could：表示过去的能力或可能性，或提出请求。
+	例：He could play the piano when he was young.
+	
+	May：表示许可或可能性。
+	例：You may leave early.
+	
+	Might：表示较低的可能性。
+	例：It might rain tomorrow.
+	
+	Must：表示必要性或强烈的推测。
+	例：You must see this movie.
+	
+	Should：表示建议或义务。
+	例：You should study for the exam.
+```
+
+## 系动词
+
+```
+用来辅助主语的动词.赋值作用.
+
+The carrot smells(赋值) nice.
+```
+
+
+
+## 使役动词
+
+![](../../images\Snipaste_2025-04-19_14-59-42.png)
+
+```
+（Causative Verbs）
+常见使役动词
+
+Make
+	结构：make + 人 + 动词原形
+	用法：表示强迫或使某人做某事。
+	例子：She made him cry. (她让他哭了。)
+
+Have
+	结构：have + 人 + 动词原形
+	用法：表示委托或安排某人做某事。
+	例子：I had the mechanic check my car. (我让机械师检查了我的车。)
+
+Let
+	结构：let + 人 + 动词原形
+	用法：表示允许某人做某事。
+	例子：They let her leave early. (他们让她早离开。)
+
+Get
+	结构：get + 人 + to + 动词原形
+	用法：表示说服或安排某人做某事。
+	例子：I got him to help me. (我让他帮了我。)
+	
+使役动词的用法:
+表达强迫、委托、允许或说服：
+	Make：强调强迫性。
+	Have：强调安排或委托。
+	Let：强调允许。
+	Get：强调说服或引导。
+
+	使役动词用于描述让他人执行某动作的情况，主要包括 make、have、let 和 get。
+```
 

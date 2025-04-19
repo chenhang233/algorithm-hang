@@ -1,0 +1,17 @@
+"
+28. 答：delete from sc where grade < 50 
+29. 答：用连接查询实现
+ delete from sc from sc join student s on s.sno=sc.sno 
+ where sdept = '信息管理系' and grade < 50 
+ 2）用子查询实现
+ delete from sc where sno in ( 
+ select sno from student where sdept = '信息管理系' ) 
+ and grade < 50 
+30. 答：delete from sc 
+ where grade = ( 
+ select min(grade) from sc 
+ join course c on c.cno = sc.cno 
+ where cname = 'Java') 
+ and cno in( 
+ select cno from course where cname = ' Java ')
+"
