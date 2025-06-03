@@ -276,3 +276,47 @@ Get
 	使役动词用于描述让他人执行某动作的情况，主要包括 make、have、let 和 get。
 ```
 
+
+
+## 从句
+
+#### 概念
+
+```
+	从句（Clause）是指一个包含主语和谓语的句子结构，但它不能独立存在，必须依附于主句（Main Clause）才能构成完整意义。从句通常由从属连词（Subordinating Conjunction）、关系代词（Relative Pronoun）或关系副词（Relative Adverb）引导
+```
+
+#### **三大类型**
+
+```
+-- 名词性从句（Noun Clause）
+	在句中充当名词成分（主语、宾语、表语、同位语）。
+	引导词：that, whether, if, who, what, when, where, why, how 等。
+例句：
+	主语从句：What he said is true.（他所说的是真的。）
+
+	宾语从句：I know that she is busy.（我知道她很忙。）
+
+	表语从句：The problem is whether we can finish on time.（问题是我们能否按时完成。）
+
+-- 形容词性从句（定语从句，Adjective/Relative Clause）
+	修饰名词或代词，相当于形容词的作用。
+	引导词：who, whom, whose, which, that, where, when, why 等。
+例句：
+	The book that you lent me is interesting.（你借给我的那本书很有趣。）
+
+	This is the city where I was born.（这是我出生的城市。）
+
+-- 副词性从句（状语从句，Adverbial Clause）
+	在句中作状语，表示时间、原因、条件、目的等。
+	引导词：when, because, if, although, since, so that 等。
+
+例句：
+
+	时间状语：When it rains, the ground gets wet.（下雨时，地面会湿。）
+
+	原因状语：She stayed home because she was sick.（她因为生病待在家里。）
+
+	条件状语：If you study hard, you will pass the exam.（如果你努力学习，就会通过考试。）
+```
+
