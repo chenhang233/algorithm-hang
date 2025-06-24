@@ -320,3 +320,90 @@ Get
 	条件状语：If you study hard, you will pass the exam.（如果你努力学习，就会通过考试。）
 ```
 
+## 冠词
+
+#### 定冠词(Definite Article)
+
+```
+定冠词：the
+用法：指特定或已知的人或物，双方都明确所指的对象。
+
+特指：
+
+The book on the table is mine.（桌上的那本书是我的。）
+
+The sun is bright.（太阳很明亮。——独一无二的事物）
+
+再次提到：
+
+I saw a cat. The cat was black.（我看到一只猫，那只猫是黑色的。）
+
+序数词/最高级：
+
+She won the first prize.（她得了第一名。）
+
+某些专有名词：
+
+the United States（美国）、the Nile（尼罗河）
+```
+
+
+
+#### **不定冠词**（Indefinite Articles）
+
+```
+不定冠词：a / an
+用法：泛指不特定的人或物，或首次提到的事物。
+
+a：用于辅音音素开头的词（注意是发音，不是字母）：
+
+a book, a university（/juː/ 发音是辅音）
+
+an：用于元音音素开头的词：
+
+an apple, an hour（/aʊər/ 中 "h" 不发音）
+
+泛指某一类：
+
+She is a teacher.（她是老师。——指职业）
+
+数量“一”（但不如 one 强调数量）：
+
+I need a pen.（我需要一支笔。）
+```
+
+
+
+#### **零冠词**（Zero Article）
+
+```
+零冠词（不用冠词）
+用法：
+
+泛指复数或不可数名词：
+
+Cats are cute.（猫很可爱。——泛指所有猫）
+
+Love is important.（爱很重要。）
+
+专有名词（人名、国家、城市等）：
+
+Paris is beautiful.（巴黎很美。）
+
+Mr. Smith called you.（史密斯先生找你。）
+
+抽象概念或学科：
+
+She studies physics.（她学习物理。）
+
+固定搭配：
+
+go to school（上学）、at night（在晚上）
+```
+
+#### 总结
+
+```
+特指用 the，泛指 a/an
+```
+

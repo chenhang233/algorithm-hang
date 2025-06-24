@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>随机怪叫</title>
+    <style>
+      body {
+        background-color: #ff0000;
+        color: white;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding-top: 100px;
+        transition: background-color 0.5s;
+      }
+      h1 {
+        font-size: 3em;
+        text-shadow: 2px 2px 4px #000;
+      }
+      #volume-control {
+        margin-top: 20px;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 1.2em;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>随机怪叫生成器</h1>
+    <p>每次点击会随机播放一种怪叫声</p>
+
+    <div id="volume-control">
+      <label for="volume">音量控制：</label>
+      <input type="range" id="volume" min="0" max="1" step="0.1" value="0.5" />
+    </div>
+
+    <button id="btn" onclick="playRandomSound()">开始叫</button>
+
+    <!-- 音频元素 -->
+    <audio id="scream" preload="auto"></audio>
+
+    <script>
+      // 音频文件列表
+      const soundFiles = [
+        'https://downsc.chinaz.net/Files/DownLoad/sound1/202505/xm3682.mp3', // 战斗声
+        'https://downsc.chinaz.net/Files/DownLoad/sound1/202505/xm3676.mp3', // 母鸡声
+        'https://downsc.chinaz.net/Files/Do3wnLoad/sound1/202505/xm3677.mp3', // 扫描声
+        'https://downsc.chinaz.net/Files/DownLoad/sound1/202505/xm3674.mp3', // 牛叫
+      ]
+
+      // 当前播放的声音索引
+      let currentSoundIndex = -1
+
+      // 页面加载时初始化
+      window.onload = function () {
+        // 随机改变背景颜色
+        setInterval(function () {
+          const colors = [
+            '#ff0000',
+            '#00ff00',
+            '#0000ff',
+            '#ffff00',
+            '#ff00ff',
+            '#00ffff',
+          ]
+          document.body.style.backgroundColor =
+            colors[Math.floor(Math.random() * colors.length)]
+        }, 500)
+      }
+
+      // 随机播放声音函数
+      function playRandomSound() {
+        const scream = document.getElementById('scream')
+
+        // 随机选择一个新的声音（确保不和上次重复）
+        let newIndex
+        do {
+          newIndex = Math.floor(Math.random() * soundFiles.length)
+        } while (newIndex === currentSoundIndex && soundFiles.length > 1)
+
+        currentSoundIndex = newIndex
+
+        // 设置音频源
+        scream.src = soundFiles[currentSoundIndex]
+        scream.volume = document.getElementById('volume').value
+        scream.currentTime = 0 // 重置音频到开始
+
+        // 播放音频
+        scream.play().catch((e) => {
+          console.log('播放失败:', e)
+          alert('请先点击页面任意位置解除音频限制')
+        })
+      }
+
+      // 音量控制
+      document.getElementById('volume').addEventListener('input', function () {
+        document.getElementById('scream').volume = this.value
+      })
+
+      // 首次交互解除音频限制
+      document.body.addEventListener('click', function init() {
+        // 移除事件监听器，只需要执行一次
+        document.body.removeEventListener('click', init)
+
+        // 可以在这里自动播放一个声音（可选）
+        // playRandomSound();
+      })
+
+      const btn = document.getElementById('btn')
+      setTimeout(() => {
+        console.log(111)
+        btn.click()
+      }, 1000)
+    </script>
+  </body>
+</html>
