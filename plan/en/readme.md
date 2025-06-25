@@ -322,6 +322,14 @@ Get
 
 ## 冠词
 
+##### 核心作用
+
+```
+用来限定名词的范围.
+```
+
+
+
 #### 定冠词(Definite Article)
 
 ```
@@ -405,5 +413,242 @@ go to school（上学）、at night（在晚上）
 
 ```
 特指用 the，泛指 a/an
+```
+
+## 介词
+
+#### 作用
+
+```
+英语介词（Prepositions）是连接名词、代词或短语与其他句子成分的词，用于表示时间、地点、方向、方式等关系
+```
+
+#### 表示
+
+```
+1. 表示时间（Time）
+at: 具体时间点
+
+at 7 PM, at noon
+
+on: 具体某天或日期
+
+on Monday, on June 25th
+
+in: 较长时段（年/月/季节/世纪）或泛指早晚
+
+in 2025, in summer, in the morning
+
+for: 持续一段时间
+
+for two hours
+
+since: 从过去某一时间点开始
+
+since 2010
+
+by: 截止到某时间
+
+by tomorrow
+
+during: 在……期间
+
+during the holiday
+
+2. 表示地点（Place）
+at: 具体地点或小范围
+
+at the door, at school
+
+in: 封闭空间或大范围
+
+in the room, in China
+
+on: 表面或线上
+
+on the table, on the wall
+
+under: 正下方
+
+under the bed
+
+above/below: 高低位置（不接触）
+
+above the clouds
+
+between: 两者之间
+
+between A and B
+
+among: 三者及以上之间
+
+among the trees
+
+3. 表示方向/运动（Movement）
+to: 目的地
+
+go to school
+
+into: 进入内部
+
+jump into the pool
+
+out of: 从……出来
+
+walk out of the room
+
+across: 横穿
+
+walk across the bridge
+
+through: 穿过内部
+
+drive through the tunnel
+
+toward(s): 朝向
+
+run towards the park
+
+4. 表示方式/工具（Manner/Means）
+by: 交通工具或方式
+
+by car, by email
+
+with: 使用具体工具或伴随
+
+write with a pen, with a smile
+
+in: 用某种语言或材料
+
+in English, in pencil
+
+5. 其他常见介词
+of: 所属或材料
+
+a cup of tea, made of wood
+
+about: 关于
+
+talk about the weather
+
+for: 目的或受益对象
+
+a gift for you
+
+from: 来源或起点
+
+a letter from home
+```
+
+## 名词
+
+#### 概念
+
+```
+名词是表示人、事物、地点、概念等的词类，在句子中可作主语、宾语、表语、定语等。
+```
+
+#### **1. 名词的分类**
+
+```
+(1) 普通名词（Common Nouns）
+表示一般事物，可数或不可数。
+
+可数名词（Countable）：有单复数形式
+
+a book → books, a child → children
+
+不可数名词（Uncountable）：无复数，不能直接加a/an
+
+water, information, advice
+
+(2) 专有名词（Proper Nouns）
+表示特定名称，首字母大写，无复数（除非指多个同名个体）。
+
+China, Alice, the United Nations
+
+(3) 集体名词（Collective Nouns）
+表示群体，单数形式但可指代多个成员。
+
+family, team, audience（强调整体时用单数动词，强调成员时用复数）
+
+His family is large.（整体）
+
+The family are arguing.（成员）
+
+(4) 抽象名词（Abstract Nouns）
+表示概念、情感、状态等，通常不可数。
+
+love, happiness, freedom, knowledge
+
+(5) 物质名词（Material Nouns）
+表示材料或物质，一般不可数。
+
+wood, gold, coffee（但表示种类时可数：three coffees）
+```
+
+#### **名词的数（单数 vs. 复数）**
+
+```
+(1) 规则复数变化
+直接加 -s: cat → cats
+
+以 -s, -sh, -ch, -x, -o 结尾加 -es:
+
+bus → buses, box → boxes, tomato → tomatoes
+
+以 辅音字母 + y 结尾，变 y→i + es:
+
+city → cities, baby → babies
+
+以 -f/-fe 结尾，变 f→v + es:
+
+leaf → leaves, knife → knives
+
+(2) 不规则复数变化
+变元音或完全改变：
+
+man → men, woman → women, child → children
+
+单复数同形：
+
+sheep, fish, deer
+
+外来词保留原复数：
+
+criterion → criteria, phenomenon → phenomena
+
+(3) 不可数名词的量化
+不可数名词需借助量词表示数量：
+
+a piece of paper, two cups of coffee, some information
+```
+
+#### **3. 名词的所有格（Possessive Case）**
+
+```
+英语名词的所有格（Possessive Case）主要用于表示所属关系（即“谁的”或“什么的”），也可以表示时间、地点、来源、特征等含义。
+```
+
+```
+表示所属关系，规则：
+
+单数名词 + ’s:
+
+the girl’s book
+
+复数名词（以s结尾） + ’:
+
+the students’ classroom
+
+不规则复数名词 + ’s:
+
+the children’s toys
+
+无生命物体用 "of":
+
+the roof of the house（但时间/地点可用’s：today’s news）
+
+
 ```
 
