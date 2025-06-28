@@ -652,3 +652,67 @@ the roof of the house（但时间/地点可用’s：today’s news）
 
 ```
 
+## 代词
+
+#### 作用
+
+```
+英语代词是用来代替名词或名词短语的词类，主要用于避免重复、简化句子
+```
+
+#### 类型
+
+```
+1. 人称代词（Personal Pronouns）
+主格（作主语）：I, you, he, she, it, we, they
+例句：She is a teacher.
+
+宾格（作宾语）：me, you, him, her, it, us, them
+例句：He gave me a book.
+
+2. 物主代词（Possessive Pronouns）
+形容词性（修饰名词）：my, your, his, her, its, our, their
+例句：This is her bag.
+
+名词性（独立使用）：mine, yours, his, hers, its, ours, theirs
+例句：The book is mine.
+
+3. 反身代词（Reflexive Pronouns）
+表示动作返回主语自身：myself, yourself, himself, herself, itself, ourselves, yourselves, themselves
+例句：She hurt herself.
+
+4. 指示代词（Demonstrative Pronouns）
+指代特定事物：this（这个）, that（那个）, these（这些）, those（那些）
+例句：These are my books.
+
+5. 相互代词（Reciprocal Pronouns）
+表示相互关系：each other（两者之间）, one another（三者及以上）
+例句：They help each other.
+
+6. 疑问代词（Interrogative Pronouns）
+用于提问：who（谁）, whom（谁，宾格）, whose（谁的）, which（哪个）, what（什么）
+例句：What is your name?
+
+7. 关系代词（Relative Pronouns）
+引导定语从句：who, whom, whose, which, that
+例句：The man who is speaking is my boss.
+
+8. 不定代词（Indefinite Pronouns）
+泛指人或事物：
+
+单数：someone, anybody, nothing, each, either
+例句：Someone is knocking.
+
+复数：both, few, many, others
+例句：Few know the truth.
+
+单复数通用：all, some, none
+例句：All is ready. / All are here.
+
+9. 连接代词（Conjunctive Pronouns）
+引导名词性从句：who, whom, whose, which, what
+例句：I know what you want.
+
+
+```
+
