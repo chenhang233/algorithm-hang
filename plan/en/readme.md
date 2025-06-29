@@ -716,3 +716,189 @@ the roof of the house（但时间/地点可用’s：today’s news）
 
 ```
 
+## 数词
+
+#### **一、基数词（Cardinal Numbers）**
+
+```
+表示数量多少的数词。
+1. 基本形式：
+
+1~12：one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve
+
+13~19：以 -teen 结尾（thirteen, fourteen, fifteen... nineteen）
+
+20~90整十：以 -ty 结尾（twenty, thirty, forty, fifty... ninety）
+
+21~99：十位 + 个位（如：twenty-one, thirty-two）
+
+2. 大数表达：
+
+100：one hundred
+
+1,000：one thousand
+
+1,000,000：one million
+
+1,000,000,000：one billion（美式）/ one thousand million（英式）
+注意：百位与十位之间加 and（英式常用，如：105 → one hundred and five）。
+```
+
+#### **二、序数词（Ordinal Numbers）**
+
+```
+表示顺序的数词，常加定冠词 the。
+1. 基本规则：
+
+第1~3：first (1st), second (2nd), third (3rd)
+
+第4~19：基数词 + -th（fourth, fifth, sixth... nineteenth）
+
+第20~90整十：去 y 变 ie + -th（如：twentieth, thirtieth）
+
+第21及以上：十位用基数词，个位用序数词（如：21st → twenty-first）
+
+2. 缩写形式：
+数字 + 最后两个字母（如：1st, 2nd, 3rd, 4th...）。
+```
+
+#### **三、分数（Fractions）**
+
+```
+1. 构成：
+分子（基数词） + 分母（序数词，分子>1时分母加 -s）
+
+1/2：one half（或 a half）
+
+1/3：one third
+
+3/4：three quarters（或 three fourths）
+
+5/8：five eighths
+
+2. 注意：
+
+整数 + and + 分数（如：2½ → two and a half）。
+```
+
+#### **四、小数（Decimals）**
+
+```
+用 point 表示小数点，每位数字单独读：
+
+0.5：zero point five
+
+3.14：three point one four
+
+12.06：twelve point zero six
+```
+
+## 形容词
+
+```
+形容词（Adjective）用于修饰名词或代词，描述人或事物的性质、状态、特征或数量。
+```
+
+#### **形容词的分类**
+
+```
+性质形容词（Qualitative Adjectives）
+描述事物的性质或特征，有比较级和最高级。
+例：big, small, happy, sad, beautiful
+
+数量形容词（Quantitative Adjectives）
+表示数量或程度，通常无比较级。
+例：some, many, few, little, several
+
+指示形容词（Demonstrative Adjectives）
+指出特定名词，相当于限定词。
+例：this, that, these, those（如：this book）
+
+疑问形容词（Interrogative Adjectives）
+用于提问，修饰名词。
+例：Which color do you like? Whose bag is this?
+
+所有格形容词（Possessive Adjectives）
+表示所属关系。
+例：my, your, his, her, its, our, their
+
+复合形容词（Compound Adjectives）
+由两个或多个词组成，常用连字符连接。
+例：
+
+a well-known actor（著名的）
+
+a three-year-old child（三岁的）
+```
+
+#### **形容词的用法**
+
+```
+作定语（Attributive）
+直接修饰名词，通常位于名词前。
+例：She has a blue car.
+
+作表语（Predicative）
+位于系动词（如 be, seem, become）后，描述主语状态。
+例：The sky is clear.
+
+后置修饰（Postpositive）
+某些情况下形容词需放在名词后：
+
+修饰不定代词（something, anything等）：
+例：I want something special.
+
+固定短语（如：time enough, the president elect）。
+```
+
+#### **形容词的比较等级**
+
+```
+原级（Positive）
+基本形式，表示“和……一样”用 as...as。
+例：She is as tall as her brother.
+
+比较级（Comparative）
+
+规则变化：
+
+单音节词：词尾加 -er（tall → taller）
+
+双音节词：以-y结尾变 -ier（happy → happier）；其他加 more（careful → more careful）
+
+三音节及以上：加 more（beautiful → more beautiful）
+
+不规则变化：
+good/well → better, bad → worse, far → farther/further
+
+用法：比较两者，用 than。
+例：This book is more interesting than that one.
+
+最高级（Superlative）
+
+规则变化：
+
+单音节词：加 -est（tall → tallest）
+
+双音节及以上：加 most（careful → most careful）
+
+不规则变化：
+good → best, bad → worst, far → farthest/furthest
+
+用法：比较三者及以上，前加 the。
+例：He is the tallest in his class.
+
+
+```
+
+#### **形容词的顺序**
+
+```
+多个形容词修饰同一名词时，顺序通常为：
+限定词（a, the）→ 观点 → 大小 → 形状 → 年龄 → 颜色 → 来源 → 材料 → 用途 → 名词
+例：
+
+a lovely little old round red Chinese wooden table
+（观点→大小→年龄→形状→颜色→来源→材料）
+```
+
