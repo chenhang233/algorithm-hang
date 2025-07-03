@@ -902,3 +902,88 @@ a lovely little old round red Chinese wooden table
 （观点→大小→年龄→形状→颜色→来源→材料）
 ```
 
+## 副词
+
+#### 定义
+
+```
+副词用于修饰动词、形容词、其他副词或整个句子，表示时间、地点、程度、方式、频率等，使语言更准确、丰富。
+```
+
+#### **副词的分类与用法**
+
+```
+(1) 按功能分类
+类型	作用	例句
+时间副词	表示动作发生的时间	now, today, soon, already, yesterday
+地点副词	表示动作发生的地点	here, there, everywhere, upstairs
+方式副词	描述动作如何发生（常以-ly结尾）	slowly, carefully, happily, angrily
+程度副词	修饰形容词或副词，表示程度	very, quite, too, almost, extremely
+频率副词	表示动作发生的频率	always, often, sometimes, never, rarely
+句子副词	修饰整个句子，表达态度或观点	fortunately, obviously, honestly
+(2) 按形式分类
+简单副词（不带-ly）：fast, hard, late, early
+
+派生副词（形容词+ly）：quick → quickly, happy → happily
+
+不规则副词：good → well, fast → fast, hard → hard
+```
+
+## 连词
+
+#### 作用
+
+```
+连词（Conjunctions）是连接单词、短语、从句或句子的词，主要分为 并列连词 和 从属连词 两大类。
+```
+
+#### **并列连词（Coordinating Conjunctions）**
+
+```
+连接语法结构相同的成分（单词、短语或独立分句）。
+For（因为，表原因）
+
+And（和，表并列）
+
+Nor（也不，否定补充）
+
+But（但是，表转折）
+
+Or（或者，表选择）
+
+Yet（然而，表对比）
+
+So（所以，表结果）
+
+例句：
+
+She likes tea and coffee. （并列）
+
+He tried hard, yet he failed. （对比）
+```
+
+#### **从属连词（Subordinating Conjunctions）**
+
+```
+作用：引导从句（状语从句），依附于主句，表示时间、原因、条件等逻辑关系。
+常见从属连词：
+
+时间：when, while, before, after, since, until
+
+原因：because, since, as
+
+条件：if, unless, provided that
+
+让步：although, even though
+
+目的：so that, in order that
+
+结果：so…that, such…that
+
+例句：
+
+Although it rained, we went out. （让步）
+
+She stayed until the meeting ended. （时间）
+```
+
