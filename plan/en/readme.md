@@ -987,3 +987,34 @@ Although it rained, we went out. （让步）
 She stayed until the meeting ended. （时间）
 ```
 
+## 被动
+
+````
+用于强调动作的承受者而非执行者
+````
+
+#### 结构
+
+```
+公式：be动词 + 过去分词 (V3) + (by + 执行者)
+
+主动：They built this house (in 2020).
+
+被动：This house was built (by them) (in 2020).
+
+✅ be动词需随主语时态变化（见下文时态对照）。
+
+
+强调动作承受者：
+
+The Mona Lisa was painted by Da Vinci.（强调画作）
+
+执行者未知/不重要：
+
+The road is being repaired.（谁修路不重要）
+
+客观描述（科技、新闻等）：
+
+All passengers are required to wear seatbelts.
+```
+
