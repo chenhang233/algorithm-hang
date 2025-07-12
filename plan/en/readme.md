@@ -1018,3 +1018,110 @@ The road is being repaired.（谁修路不重要）
 All passengers are required to wear seatbelts.
 ```
 
+## 倒装
+
+#### 概念
+
+```
+通过改变主语和谓语（或助动词）的正常顺序来强调句子中的某些部分。倒装主要分为两种：完全倒装和部分倒装
+```
+
+#### **完全倒装（Full Inversion）**
+
+```
+结构：谓语动词完全放在主语之前。
+常见情况：
+
+地点副词/介词短语开头（表示方位的词或短语）：
+
+正常语序：The book is on the table.
+
+倒装语序：On the table is the book.
+
+例句：Here comes the bus.（公交车来了。）
+
+表语前置（为了强调或平衡句子）：
+
+Gone are the days when we played together.（我们一起玩耍的日子一去不复返。）
+
+某些副词开头（如 here, there, out, in, up, down 等）：
+
+There goes the bell!（铃响了！）
+
+Out rushed the children.（孩子们冲了出去。）
+```
+
+#### **部分倒装（Partial Inversion）**
+
+```
+结构：助动词/情态动词放在主语前，主要动词仍保留在主语后。
+常见情况：
+
+否定词或半否定词开头（如 never, seldom, hardly, not only, little, nowhere 等）：
+
+Never have I seen such a beautiful sunset.（我从未见过如此美丽的日落。）
+
+Not only does he study hard, but he also helps others.（他不仅学习努力，还乐于助人。）
+
+“Only + 状语”开头（如 only then, only after, only when）：
+
+Only after the storm passed could we go outside.（只有在暴风雨过后，我们才能出去。）
+
+“So/Neither/Nor” 表示“也/也不”：
+
+She loves music, and so do I.（她喜欢音乐，我也是。）
+
+He didn’t finish the homework, and neither did she.（他没完成作业，她也没完成。）
+
+虚拟条件句省略“if”时（将 were, had, should 提前）：
+
+Were I you (= If I were you), I would apologize.（如果我是你，我会道歉。）
+
+Had he known (= If he had known), he would have come.（如果他早知道，他就会来了。）
+
+“So…that…” 或 “Such…that…” 结构中，“so/such” 提前时：
+
+So fast did he run that no one could catch him.（他跑得太快了，没人能追上他。）
+```
+
+## **主谓一致**
+
+#### 总结
+
+```
+主谓一致是指谓语动词必须与其主语在人称（第一、第二、第三人称）和数（单数、复数）上保持一致。
+```
+
+#### **基本原则**
+
+```
+(1) 单数主语 + 单数动词
+The cat likes milk.（猫喜欢牛奶。）
+
+She goes to school every day.（她每天上学。）
+
+(2) 复数主语 + 复数动词
+The cats like milk.（猫喜欢牛奶。）
+
+They go to school every day.（他们每天上学。）
+```
+
+#### **特殊规则**
+
+```
+(1) 不定代词作主语（通常用单数动词）
+Everyone / Somebody / Nobody / Each / Either / Neither 等不定代词作主语时，谓语用单数：
+
+Everyone is here.（大家都在。）
+
+Nobody knows the answer.（没人知道答案。）
+
+Each of the students has a book.（每个学生都有一本书。）
+
+⚠️ 例外：
+
+Both / Several / Many / Few 接复数动词：
+
+Both of them are correct.（两个都对。）
+```
+
