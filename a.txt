@@ -17,3 +17,7 @@
 "
 
 
+http://192.168.2.1/telnet?enable=1&key=48-12-58-52-c6-36
+
+
+http://192.168.1.1/telnet?enable=1&key=08-2f-e9-3f-de-e6
